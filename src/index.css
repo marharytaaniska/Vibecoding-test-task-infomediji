@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: rgb(255, 255, 255);
+  color: rgb(29, 36, 46);
+  font-family: var(--font-sans);
+}
+
+a {
+  color: rgb(79, 149, 255);
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgb(63, 78, 100);
+}
+
+@keyframes hero-player-float {
+  0%,
+  100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, -12px);
+  }
+}
+
+.animate-hero-player-float {
+  animation: hero-player-float 4.5s ease-in-out infinite;
+}
