@@ -23,42 +23,44 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <div className="mx-[185px] mt-[160px] mb-16 box-border flex gap-8 rounded-lg bg-white p-8">
-      <div className="flex flex-1 flex-col gap-6">
-        <img src="/assets/logo-wordmark.png" alt="DeoVR" className="h-[34px] w-[100px] object-contain" />
-        <span className="text-xs leading-[1.5] font-normal text-[rgb(29,36,46)]">
-          © 2026 DeoVR. This website is protected by reCAPTCHA, and the Google Privacy Policy and Terms of Service apply.
-        </span>
-      </div>
-      <div className="flex flex-1 flex-col gap-3">
-        <span className="text-base leading-[1.5] font-semibold text-[rgb(29,36,46)]">About us</span>
-        <div className="flex flex-col gap-2">
-          {aboutLinks.map((label) => (
-            <a key={label} href="#" className="text-sm text-[rgb(125,146,175)]">
-              {label}
-            </a>
-          ))}
+    <div className="mt-16 w-full sm:mt-[100px] md:mt-[100px]">
+      <div className="mx-auto box-border flex w-full max-w-[1486px] flex-col items-start gap-8 rounded-lg bg-white px-4 pt-0 pb-8 sm:px-6 md:px-8 lg:flex-row lg:flex-wrap lg:justify-between">
+        <div className="order-last flex flex-col gap-6 lg:order-none">
+          <img src="/assets/logo-wordmark.png" alt="DeoVR" className="h-[34px] w-[100px] object-contain" />
+          <span className="max-w-[350px] text-xs leading-[1.5] font-normal text-[#7D92AF]">
+            © 2026 DeoVR. This website is protected by reCAPTCHA, and the Google Privacy Policy and Terms of Service apply.
+          </span>
         </div>
-      </div>
-      <div className="flex flex-1 flex-col gap-3">
-        <span className="text-base leading-[1.5] font-semibold text-[rgb(29,36,46)]">Legal</span>
-        <div className="flex flex-col gap-2">
-          {legalLinks.map((label) => (
-            <a key={label} href="#" className="text-sm text-[rgb(125,146,175)]">
-              {label}
-            </a>
-          ))}
+        <div className="flex flex-col gap-3">
+          <span className="text-base leading-[1.5] font-semibold text-[rgb(29,36,46)]">About us</span>
+          <div className="flex flex-col gap-2">
+            {aboutLinks.map((label) => (
+              <a key={label} href="#" className="text-[15px] font-medium">
+                {label}
+              </a>
+            ))}
+          </div>
         </div>
-      </div>
-      <div className="flex flex-1 flex-col gap-3">
-        <span className="text-base leading-[1.5] font-semibold text-[rgb(29,36,46)]">Social Media</span>
-        <div className="grid grid-cols-2 gap-2">
-          {socialLinks.map((s) => (
-            <a key={s.label} href="#" className="flex items-center gap-2 text-sm text-[rgb(125,146,175)]">
-              <img src={s.icon} alt="" className="h-5 w-5" />
-              {s.label}
-            </a>
-          ))}
+        <div className="flex flex-col gap-3">
+          <span className="text-base leading-[1.5] font-semibold text-[rgb(29,36,46)]">Legal</span>
+          <div className="flex flex-col gap-2">
+            {legalLinks.map((label) => (
+              <a key={label} href="#" className="text-[15px] font-medium">
+                {label}
+              </a>
+            ))}
+          </div>
+        </div>
+        <div className="flex flex-col gap-3">
+          <span className="text-base leading-[1.5] font-semibold text-[rgb(29,36,46)]">Social Media</span>
+          <div className="flex flex-col gap-2">
+            {socialLinks.map((s) => (
+              <a key={s.label} href="#" className="flex items-center gap-2 text-[15px] font-medium">
+                <img src={s.icon} alt="" className="h-5 w-5" />
+                {s.label}
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </div>

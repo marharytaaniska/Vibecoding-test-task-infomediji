@@ -10,7 +10,7 @@ import Footer from "./components/Footer";
 
 function App() {
   return (
-    <div className="relative mx-auto w-[1920px] bg-white font-sans text-[rgb(29,36,46)]">
+    <div className="relative w-full bg-white font-sans text-[rgb(29,36,46)]">
       <Header />
       <Hero />
       <Stats />
