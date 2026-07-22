@@ -1,4 +1,5 @@
 import Header from "./components/Header";
+import ScrollVideo from "./components/ScrollVideo";
 import Hero from "./components/Hero";
 import Stats from "./components/Stats";
 import Reviews from "./components/Reviews";
@@ -12,6 +13,7 @@ function App() {
   return (
     <div className="relative w-full bg-white font-sans text-[rgb(29,36,46)]">
       <Header />
+      <ScrollVideo />
       <Hero />
       <Stats />
       <Reviews />

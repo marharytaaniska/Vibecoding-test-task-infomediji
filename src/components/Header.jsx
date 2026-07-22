@@ -28,7 +28,7 @@ export default function Header() {
 
   return (
     <>
-      <div ref={headerRef} className="fixed inset-x-0 top-0 z-[100] w-full bg-white">
+      <div id="site-header" ref={headerRef} className="fixed inset-x-0 top-0 z-[100] w-full bg-white">
         <div className="relative z-[95] flex h-[72px] flex-row items-center justify-between gap-2 bg-white px-4 sm:h-[84px] sm:gap-6 sm:px-8">
           <div className="flex items-center gap-2 sm:gap-4 xl:gap-16">
             <button
