@@ -1,11 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 
 const SCROLL_VIDEO_SRC = "/assets/intro.mp4";
+const START_FRAME_IMAGE = "/assets/image 5.jpg";
+const END_FRAME_IMAGE = "/assets/image 8.jpg";
+const END_THRESHOLD = 0.999;
 
 export default function ScrollVideo() {
   const sectionRef = useRef(null);
   const stickyRef = useRef(null);
   const videoRef = useRef(null);
+  const endFrameRef = useRef(null);
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
@@ -44,7 +48,9 @@ export default function ScrollVideo() {
 
       const sectionRect = section.getBoundingClientRect();
       const scrollable = sectionRect.height - stickyHeight;
-      const progress = scrollable > 0 ? Math.min(Math.max(-sectionRect.top / scrollable, 0), 1) : 0;
+      // The section is pinned once its top reaches headerHeight (not 0), so
+      // that offset has to be added back in or progress caps out short of 1.
+      const progress = scrollable > 0 ? Math.min(Math.max((headerHeight - sectionRect.top) / scrollable, 0), 1) : 0;
 
       sticky.style.height = `${stickyHeight}px`;
       if (sectionRect.top > headerHeight) {
@@ -65,6 +71,13 @@ export default function ScrollVideo() {
       if (Number.isFinite(targetTime) && Math.abs(video.currentTime - targetTime) > 0.01) {
         video.currentTime = targetTime;
       }
+
+      // Seeking a compressed video to the exact last frame can land a hair
+      // short or paint a soft/blocky frame, so once fully scrolled, swap in
+      // the crisp end-frame still instead of trusting the video's own seek.
+      if (endFrameRef.current) {
+        endFrameRef.current.style.opacity = progress >= END_THRESHOLD ? "1" : "0";
+      }
     };
 
     const onScroll = () => {
@@ -83,14 +96,25 @@ export default function ScrollVideo() {
 
   return (
     <section ref={sectionRef} className="relative h-[300vh] sm:h-[350vh]">
-      <div ref={stickyRef} className="absolute left-0 top-0 w-full overflow-hidden bg-black">
+      <div
+        ref={stickyRef}
+        className="absolute left-0 top-0 h-[calc(100vh-72px)] w-full overflow-hidden bg-black sm:h-[calc(100vh-84px)]"
+      >
         <video
           ref={videoRef}
           src={SCROLL_VIDEO_SRC}
+          poster={START_FRAME_IMAGE}
           muted
           playsInline
           preload="auto"
           className="absolute inset-0 h-full w-full object-cover"
+        />
+        <img
+          ref={endFrameRef}
+          src={END_FRAME_IMAGE}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-200"
         />
       </div>
     </section>
