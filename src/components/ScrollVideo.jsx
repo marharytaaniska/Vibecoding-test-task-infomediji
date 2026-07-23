@@ -411,7 +411,7 @@ export default function ScrollVideo({ fullBleed = true }) {
                 phaseCItemRefs.current[0] = el;
               }}
               style={itemStyle()}
-              className="bg-[linear-gradient(106deg,#fff_14.34%,#CEE1FF_132.13%)] bg-clip-text font-semibold leading-[1.05] tracking-tight text-transparent text-[round(calc(80px*var(--hero-scale)),1px)] leading-[0.85] tracking-[-0.06em]"
+              className="bg-[linear-gradient(106deg,#fff_14.34%,#CEE1FF_132.13%)] bg-clip-text font-semibold text-transparent text-[round(calc(80px*var(--hero-scale)),1px)] leading-[0.85] tracking-[-0.06em]"
             >
               This is what VR
               <br />
