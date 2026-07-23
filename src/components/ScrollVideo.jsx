@@ -140,50 +140,58 @@ export default function ScrollVideo() {
         {/* Scene A: hero title, download CTA, onboarding blurb and headline stats */}
         <div ref={phaseARef} style={{ opacity: 1, transition: "opacity 0.6s ease-out" }} className="absolute inset-0">
           <div className="absolute left-6 top-24 flex max-w-xl flex-col gap-6 sm:left-10 sm:top-28 lg:left-16">
-            <h1 className="bg-gradient-to-b from-white to-sky-200 bg-clip-text text-4xl font-semibold leading-[1.05] tracking-tight text-transparent sm:text-5xl lg:text-6xl">
+            <h1 className="bg-gradient-to-b from-white to-sky-200 bg-clip-text text-4xl font-semibold leading-[1.05] tracking-tight text-transparent sm:text-5xl lg:text-[104px] lg:leading-[0.85] lg:tracking-[-0.06em]">
               Most robust
               <br />
               and simple
               <br />
               VR player
             </h1>
-            <span className="text-sm font-normal text-white/70 md:text-base">Download for free. Any platform.</span>
+            <span className="text-sm font-normal uppercase text-white/70 md:text-base">Download for free. Any platform.</span>
             <a
               href={FREE_DOWNLOAD_URL}
-              className="flex h-11 w-fit items-center rounded-[100px] bg-[rgb(79,149,255)] px-6 py-1 font-sans text-[15px] font-semibold text-white transition-colors hover:bg-[rgb(62,121,214)]"
+              className="flex h-11 w-fit items-center rounded-[100px] bg-[rgb(79,149,255)] px-6 py-1 font-sans text-[15px] font-semibold uppercase text-white transition-colors hover:bg-[rgb(62,121,214)]"
             >
               Free Download
             </a>
           </div>
 
           <div className="absolute left-6 bottom-10 hidden max-w-sm flex-col gap-2 sm:left-10 sm:bottom-14 lg:left-16 lg:flex">
-            <h3 className="text-lg font-semibold text-white sm:text-xl">Zero friction, from day one.</h3>
-            <p className="text-xs text-white/50 sm:text-sm">
+            <h3 className="text-lg font-semibold text-white sm:text-xl lg:text-[32px] lg:leading-[0.9] lg:tracking-[-0.06em]">
+              Zero friction, from day one.
+            </h3>
+            <p className="text-xs uppercase text-white/50 sm:text-sm">
               Install in under 60 seconds — <span className="font-semibold text-white/90">no account</span>, no setup required.
             </p>
-            <a href="#" className="text-xs font-semibold text-white underline underline-offset-4 sm:text-sm">
+            <a href="#" className="text-xs font-semibold uppercase text-white underline underline-offset-4 sm:text-sm">
               Read more
             </a>
           </div>
 
           <div className="absolute right-6 top-24 bottom-10 hidden max-w-[280px] flex-col justify-between sm:right-10 lg:right-16 lg:flex">
             <div>
-              <div className="text-3xl font-semibold text-white lg:text-4xl">10M+</div>
-              <p className="mt-2 text-xs text-white/50 sm:text-sm">
+              <div className="text-3xl font-semibold text-white lg:text-[48px] lg:leading-[0.9] lg:tracking-[-0.06em]">
+                10M+
+              </div>
+              <p className="mt-2 text-xs uppercase text-white/50 sm:text-sm">
                 <span className="font-semibold text-white/90">Downloads worldwide</span> — and counting. Join a
                 community that keeps growing every single day.
               </p>
             </div>
             <div>
-              <div className="text-3xl font-semibold text-white lg:text-4xl">500K+</div>
-              <p className="mt-2 text-xs text-white/50 sm:text-sm">
+              <div className="text-3xl font-semibold text-white lg:text-[48px] lg:leading-[0.9] lg:tracking-[-0.06em]">
+                500K+
+              </div>
+              <p className="mt-2 text-xs uppercase text-white/50 sm:text-sm">
                 <span className="font-semibold text-white/90">Monthly active users</span> streaming, exploring, and
                 discovering new worlds inside DeoVR right now.
               </p>
             </div>
             <div>
-              <div className="text-3xl font-semibold text-white lg:text-4xl">190+</div>
-              <p className="mt-2 text-xs text-white/50 sm:text-sm">
+              <div className="text-3xl font-semibold text-white lg:text-[48px] lg:leading-[0.9] lg:tracking-[-0.06em]">
+                190+
+              </div>
+              <p className="mt-2 text-xs uppercase text-white/50 sm:text-sm">
                 <span className="font-semibold text-white/90">Countries</span> where people trust DeoVR as their
                 go-to VR player — from Tokyo to Toronto.
               </p>
@@ -191,7 +199,7 @@ export default function ScrollVideo() {
           </div>
 
           <div className="absolute left-1/2 bottom-8 hidden -translate-x-1/2 flex-col items-center gap-2 sm:bottom-12 sm:flex">
-            <div className="flex h-20 w-20 flex-col items-center justify-center gap-1 rounded-full border border-white/20 bg-white/5 text-[11px] font-medium uppercase tracking-wide text-white backdrop-blur-sm sm:h-24 sm:w-24">
+            <div className="flex h-20 w-20 flex-col items-center justify-center gap-1 rounded-full border border-white/20 bg-white/5 text-[11px] font-medium uppercase tracking-wide text-white backdrop-blur-sm sm:h-24 sm:w-24 lg:h-[200px] lg:w-[200px] lg:text-[16px]">
               <span>Discover</span>
               <span aria-hidden="true">↓</span>
             </div>
@@ -200,13 +208,13 @@ export default function ScrollVideo() {
 
         {/* Scene B: cross-platform headset pitch, fades in once the clip turns to profile */}
         <div ref={phaseBRef} style={{ opacity: 0, transition: "opacity 0.6s ease-out" }} className="absolute inset-0">
-          <div className="absolute right-6 top-1/2 hidden max-w-lg -translate-y-1/2 flex-col gap-6 sm:right-10 lg:right-16 lg:flex xl:right-24">
-            <h2 className="text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl">
+          <div className="absolute right-6 top-1/2 hidden max-w-lg -translate-y-1/2 flex-col gap-6 sm:right-10 lg:right-16 lg:flex lg:max-w-2xl xl:right-24">
+            <h2 className="text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-[80px] lg:leading-[0.85] lg:tracking-[-0.06em]">
               Built for every
               <br />
               headset
             </h2>
-            <p className="text-xs text-white/50 sm:text-sm md:text-base">
+            <p className="text-xs uppercase text-white/50 sm:text-sm md:text-base">
               From <span className="font-semibold text-white/90">Quest</span> to{" "}
               <span className="font-semibold text-white/90">Vision Pro</span>, from{" "}
               <span className="font-semibold text-white/90">PSVR2</span> to{" "}
@@ -230,7 +238,7 @@ export default function ScrollVideo() {
           </div>
 
           <div className="absolute left-1/2 bottom-8 hidden -translate-x-1/2 flex-col items-center gap-2 sm:bottom-12 sm:flex sm:left-[58%]">
-            <div className="flex h-20 w-20 flex-col items-center justify-center gap-1 rounded-full border border-white/20 bg-white/5 text-center text-[11px] font-medium uppercase tracking-wide text-white backdrop-blur-sm sm:h-24 sm:w-24">
+            <div className="flex h-20 w-20 flex-col items-center justify-center gap-1 rounded-full border border-white/20 bg-white/5 text-center text-[11px] font-medium uppercase tracking-wide text-white backdrop-blur-sm sm:h-24 sm:w-24 lg:h-[200px] lg:w-[200px] lg:text-[16px]">
               <span>Keep scrolling</span>
               <span aria-hidden="true">↓</span>
             </div>
