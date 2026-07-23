@@ -5,6 +5,7 @@ const START_FRAME_IMAGE = "/assets/image 5.jpg";
 const END_FRAME_IMAGE = "/assets/hero-video-scroll-end-frame.jpg";
 const END_THRESHOLD = 0.999;
 const PHASE_THRESHOLD = 0.45;
+const PHASE_C_THRESHOLD = 0.85;
 const FREE_DOWNLOAD_URL =
   "https://vibecoding-test-task-infomediji-14m2u3eyf-marharytaaniskazxc.vercel.app/#dont-think-twice";
 
@@ -15,6 +16,7 @@ export default function ScrollVideo() {
   const endFrameRef = useRef(null);
   const phaseARef = useRef(null);
   const phaseBRef = useRef(null);
+  const phaseCRef = useRef(null);
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
@@ -86,17 +88,24 @@ export default function ScrollVideo() {
         endFrameRef.current.style.opacity = progress >= END_THRESHOLD ? "1" : "0";
       }
 
-      // The overlay reads as two scenes that crossfade partway through the
-      // clip (title/stats, then the headset pitch), driven by the same
-      // scroll progress that scrubs the video — no separate observer.
-      const phaseBVisible = progress >= PHASE_THRESHOLD;
+      // The overlay reads as three scenes that crossfade through the clip
+      // (title/stats, then the headset pitch, then the closing CTA over the
+      // in-app frame), driven by the same scroll progress that scrubs the
+      // video — no separate observer.
+      const phaseCVisible = progress >= PHASE_C_THRESHOLD;
+      const phaseBVisible = progress >= PHASE_THRESHOLD && !phaseCVisible;
+      const phaseAVisible = !phaseBVisible && !phaseCVisible;
       if (phaseARef.current) {
-        phaseARef.current.style.opacity = phaseBVisible ? "0" : "1";
-        phaseARef.current.style.pointerEvents = phaseBVisible ? "none" : "auto";
+        phaseARef.current.style.opacity = phaseAVisible ? "1" : "0";
+        phaseARef.current.style.pointerEvents = phaseAVisible ? "auto" : "none";
       }
       if (phaseBRef.current) {
         phaseBRef.current.style.opacity = phaseBVisible ? "1" : "0";
         phaseBRef.current.style.pointerEvents = phaseBVisible ? "auto" : "none";
+      }
+      if (phaseCRef.current) {
+        phaseCRef.current.style.opacity = phaseCVisible ? "1" : "0";
+        phaseCRef.current.style.pointerEvents = phaseCVisible ? "auto" : "none";
       }
     };
 
@@ -248,6 +257,26 @@ export default function ScrollVideo() {
                 <span aria-hidden="true">↓</span>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Scene C: closing CTA over the in-app frame, fades in near the end of the clip */}
+        <div ref={phaseCRef} style={{ opacity: 0, transition: "opacity 0.6s ease-out" }} className="absolute inset-0">
+          <div className="absolute inset-x-0 bottom-[10%] flex flex-col items-center gap-4 px-6 text-center sm:bottom-[14%]">
+            <h2 className="text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-[56px] lg:leading-[1.05]">
+              This is what VR
+              <br />
+              should feel like
+            </h2>
+            <span className="text-xs uppercase tracking-wide text-white/60 sm:text-sm lg:text-[16px]">
+              Thousands of worlds. One seamless interface.
+            </span>
+            <a
+              href={FREE_DOWNLOAD_URL}
+              className="mt-2 flex h-11 w-fit items-center rounded-[100px] bg-[rgb(79,149,255)] px-6 py-1 font-sans text-[16px] font-medium uppercase text-white transition-colors hover:bg-[rgb(62,121,214)]"
+            >
+              Free Download
+            </a>
           </div>
         </div>
       </div>
