@@ -68,7 +68,7 @@ function animateItems(refs, visible) {
   });
 }
 
-export default function ScrollVideo() {
+export default function ScrollVideo({ fullBleed = true }) {
   const sectionRef = useRef(null);
   const stickyRef = useRef(null);
   const videoRef = useRef(null);
@@ -118,9 +118,11 @@ export default function ScrollVideo() {
   // scroll), which makes those elements the sticky containing block instead
   // of the viewport and silently breaks sticky positioning. Pin the video
   // manually with fixed/absolute instead, driven by the same scroll handler
-  // that scrubs the video's currentTime. The header on this page is a
-  // transparent overlay (no layout height of its own), so the video runs the
-  // full viewport height with no offset to account for.
+  // that scrubs the video's currentTime. On the standalone test page the
+  // header is a transparent overlay with no layout height, so the video runs
+  // full viewport height with no offset (fullBleed). Embedded on Home, the
+  // site's real header pushes content down, so the pin math needs to know
+  // its actual height instead of assuming 0.
   useEffect(() => {
     if (!isReady) return undefined;
     const section = sectionRef.current;
@@ -132,17 +134,19 @@ export default function ScrollVideo() {
 
     const updateFrame = () => {
       rafId = null;
+      const headerHeight = fullBleed ? 0 : (document.getElementById("site-header")?.offsetHeight ?? 0);
       const viewportHeight = window.innerHeight;
+      const stickyHeight = viewportHeight - headerHeight;
       const sectionRect = section.getBoundingClientRect();
-      const scrollable = sectionRect.height - viewportHeight;
-      const progress = scrollable > 0 ? Math.min(Math.max(-sectionRect.top / scrollable, 0), 1) : 0;
+      const scrollable = sectionRect.height - stickyHeight;
+      const progress = scrollable > 0 ? Math.min(Math.max((headerHeight - sectionRect.top) / scrollable, 0), 1) : 0;
 
-      sticky.style.height = `${viewportHeight}px`;
-      if (sectionRect.top > 0) {
+      sticky.style.height = `${stickyHeight}px`;
+      if (sectionRect.top > headerHeight) {
         sticky.style.position = "absolute";
         sticky.style.top = "0px";
         sticky.style.bottom = "auto";
-      } else if (sectionRect.bottom < viewportHeight) {
+      } else if (sectionRect.bottom < headerHeight + stickyHeight) {
         // The container's `top-0` utility class stays applied even after
         // clearing the inline top, so an empty string here falls back to
         // that class's top:0 instead of unsetting it — which makes `bottom`
@@ -154,7 +158,7 @@ export default function ScrollVideo() {
         sticky.style.bottom = "0px";
       } else {
         sticky.style.position = "fixed";
-        sticky.style.top = "0px";
+        sticky.style.top = `${headerHeight}px`;
         sticky.style.bottom = "auto";
       }
 

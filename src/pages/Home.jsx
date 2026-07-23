@@ -1,4 +1,5 @@
 import Header from "../components/Header";
+import ScrollVideo from "../components/ScrollVideo";
 import Hero from "../components/Hero";
 import Stats from "../components/Stats";
 import Reviews from "../components/Reviews";
@@ -12,6 +13,9 @@ function Home() {
   return (
     <>
       <Header />
+      <div className="hero-scale">
+        <ScrollVideo fullBleed={false} />
+      </div>
       <Hero />
       <Stats />
       <Reviews />
