@@ -22,16 +22,24 @@ export default function HeroVideoHeader() {
           </a>
         ))}
       </div>
-      <div className="flex shrink-0 items-center gap-2 sm:gap-4">
+      <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+        <button
+          type="button"
+          aria-label="Rewards"
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-white/20"
+        >
+          <img src="/uploads/Icon-krown.svg" alt="" className="h-5 w-5" />
+        </button>
         <a
           href="#"
-          className="hidden whitespace-nowrap text-[16px] font-medium text-white/80 transition-colors hover:text-white sm:inline"
+          className="hidden h-11 shrink-0 items-center gap-2 whitespace-nowrap rounded-full bg-white/10 px-5 text-[16px] font-medium uppercase text-white transition-colors hover:bg-white/20 sm:flex"
         >
+          <img src="/uploads/Icon-download.svg" alt="" className="h-5 w-5 brightness-0 invert" />
           Upload
         </a>
         <a
           href="#"
-          className="flex h-10 shrink-0 items-center whitespace-nowrap rounded-full border border-white/30 px-5 text-[16px] font-semibold text-white transition-colors hover:bg-white/10"
+          className="whitespace-nowrap text-[16px] font-medium uppercase text-white transition-colors hover:text-white/80"
         >
           Sign In
         </a>

@@ -149,7 +149,7 @@ export default function ScrollVideo() {
         {/* Scene A: hero title, download CTA, onboarding blurb and headline stats */}
         <div ref={phaseARef} style={{ opacity: 1, transition: "opacity 0.6s ease-out" }} className="absolute inset-0">
           <div className="absolute left-6 top-24 flex max-w-xl flex-col gap-6 sm:left-10 sm:top-28 lg:left-[56px] lg:top-[156px] lg:gap-8">
-            <h1 className="bg-gradient-to-b from-white to-[#4F95FF] bg-clip-text text-4xl font-semibold leading-[1.05] tracking-tight text-transparent sm:text-5xl lg:text-[104px] lg:leading-[0.85] lg:tracking-[-0.06em]">
+            <h1 className="bg-gradient-to-bl from-white to-[#B7D3FF] bg-clip-text text-4xl font-semibold leading-[1.05] tracking-tight text-transparent sm:text-5xl lg:text-[104px] lg:leading-[0.85] lg:tracking-[-0.06em]">
               Most robust
               <br />
               and simple
@@ -219,7 +219,7 @@ export default function ScrollVideo() {
         <div ref={phaseBRef} style={{ opacity: 0, transition: "opacity 0.6s ease-out" }} className="absolute inset-0">
           <div className="absolute right-6 top-24 bottom-10 hidden max-w-lg flex-col justify-between sm:right-10 sm:top-28 lg:right-[56px] lg:top-[156px] lg:bottom-[56px] lg:flex lg:max-w-2xl xl:right-24">
             <div>
-              <h2 className="bg-gradient-to-b from-white to-[#4F95FF] bg-clip-text text-3xl font-semibold leading-tight text-transparent sm:text-4xl lg:text-[80px] lg:leading-[0.85] lg:tracking-[-0.06em]">
+              <h2 className="bg-gradient-to-bl from-white to-[#B7D3FF] bg-clip-text text-3xl font-semibold leading-tight text-transparent sm:text-4xl lg:text-[80px] lg:leading-[0.85] lg:tracking-[-0.06em]">
                 Built for every
                 <br />
                 headset
@@ -263,7 +263,7 @@ export default function ScrollVideo() {
         {/* Scene C: closing CTA over the in-app frame, fades in near the end of the clip */}
         <div ref={phaseCRef} style={{ opacity: 0, transition: "opacity 0.6s ease-out" }} className="absolute inset-0">
           <div className="absolute inset-x-0 bottom-10 flex flex-col items-center gap-6 px-6 text-center sm:bottom-14 lg:bottom-[56px] lg:gap-8">
-            <h2 className="bg-gradient-to-b from-white to-[#4F95FF] bg-clip-text text-4xl font-semibold leading-[1.05] tracking-tight text-transparent sm:text-5xl lg:text-[80px] lg:leading-[0.85] lg:tracking-[-0.06em]">
+            <h2 className="bg-gradient-to-bl from-white to-[#B7D3FF] bg-clip-text text-4xl font-semibold leading-[1.05] tracking-tight text-transparent sm:text-5xl lg:text-[80px] lg:leading-[0.85] lg:tracking-[-0.06em]">
               This is what VR
               <br />
               should feel like
