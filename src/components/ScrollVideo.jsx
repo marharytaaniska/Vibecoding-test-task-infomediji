@@ -140,7 +140,7 @@ export default function ScrollVideo() {
         {/* Scene A: hero title, download CTA, onboarding blurb and headline stats */}
         <div ref={phaseARef} style={{ opacity: 1, transition: "opacity 0.6s ease-out" }} className="absolute inset-0">
           <div className="absolute left-6 top-24 flex max-w-xl flex-col gap-6 sm:left-10 sm:top-28 lg:left-[56px] lg:top-[156px] lg:gap-8">
-            <h1 className="bg-gradient-to-b from-white to-sky-200 bg-clip-text text-4xl font-semibold leading-[1.05] tracking-tight text-transparent sm:text-5xl lg:text-[104px] lg:leading-[0.85] lg:tracking-[-0.06em]">
+            <h1 className="bg-gradient-to-b from-white to-[#4F95FF] bg-clip-text text-4xl font-semibold leading-[1.05] tracking-tight text-transparent sm:text-5xl lg:text-[104px] lg:leading-[0.85] lg:tracking-[-0.06em]">
               Most robust
               <br />
               and simple
