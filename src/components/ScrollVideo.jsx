@@ -239,7 +239,7 @@ export default function ScrollVideo({ fullBleed = true }) {
             style={itemStyle()}
             className="absolute flex flex-col left-[round(calc(56px*var(--hero-scale)),1px)] top-[round(calc(156px*var(--hero-scale)),1px)] max-w-[round(calc(576px*var(--hero-scale)),1px)] gap-[round(calc(32px*var(--hero-scale)),1px)]"
           >
-            <h1 className="bg-[linear-gradient(106deg,#fff_14.34%,#CEE1FF_132.13%)] bg-clip-text font-semibold text-transparent text-[round(calc(104px*var(--hero-scale)),1px)] leading-[0.85] tracking-[-0.06em]">
+            <h1 className="bg-[linear-gradient(106deg,#fff_14.34%,#CEE1FF_132.13%)] bg-clip-text pb-[0.15em] -mb-[0.15em] font-semibold text-transparent text-[round(calc(104px*var(--hero-scale)),1px)] leading-[0.85] tracking-[-0.06em]">
               Most robust
               <br />
               and simple
