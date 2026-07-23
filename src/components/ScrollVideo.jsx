@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-const SCROLL_VIDEO_SRC = "/assets/intro.mp4";
+const SCROLL_VIDEO_SRC = "/assets/new.mp4";
 const START_FRAME_IMAGE = "/assets/image 5.jpg";
 const END_FRAME_IMAGE = "/assets/image 8.jpg";
 const END_THRESHOLD = 0.999;
