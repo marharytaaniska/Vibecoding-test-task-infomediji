@@ -74,15 +74,21 @@ export default function ScrollVideo() {
       if (sectionRect.top > 0) {
         sticky.style.position = "absolute";
         sticky.style.top = "0px";
-        sticky.style.bottom = "";
+        sticky.style.bottom = "auto";
       } else if (sectionRect.bottom < viewportHeight) {
+        // The container's `top-0` utility class stays applied even after
+        // clearing the inline top, so an empty string here falls back to
+        // that class's top:0 instead of unsetting it — which makes `bottom`
+        // over-constrained and CSS ignores it, snapping the pinned frame
+        // back to the section's top. Set top to an explicit "auto" so it
+        // actually loses to bottom.
         sticky.style.position = "absolute";
-        sticky.style.top = "";
+        sticky.style.top = "auto";
         sticky.style.bottom = "0px";
       } else {
         sticky.style.position = "fixed";
         sticky.style.top = "0px";
-        sticky.style.bottom = "";
+        sticky.style.bottom = "auto";
       }
 
       const targetTime = progress * video.duration;
