@@ -1,27 +1,16 @@
+import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
-import ScrollVideo from "./components/ScrollVideo";
-import Hero from "./components/Hero";
-import Stats from "./components/Stats";
-import Reviews from "./components/Reviews";
-import Features from "./components/Features";
-import Categories from "./components/Categories";
-import DownloadCta from "./components/DownloadCta";
-import Faq from "./components/Faq";
-import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import TestHeroSection from "./pages/TestHeroSection";
 
 function App() {
   return (
     <div className="relative w-full bg-white font-sans text-[rgb(29,36,46)]">
       <Header />
-      <ScrollVideo />
-      <Hero />
-      <Stats />
-      <Reviews />
-      <Features />
-      <Categories />
-      <DownloadCta />
-      <Faq />
-      <Footer />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/test-hero-section" element={<TestHeroSection />} />
+      </Routes>
     </div>
   );
 }

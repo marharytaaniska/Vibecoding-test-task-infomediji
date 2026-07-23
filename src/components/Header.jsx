@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 
 const navLinks = ["DeoVR User", "DeoVR Developer", "Documentation", "Release Notes"];
+const testHeroLink = { label: "Test hero section", to: "/test-hero-section" };
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -53,6 +55,12 @@ export default function Header() {
                   {label}
                 </a>
               ))}
+              <Link
+                to={testHeroLink.to}
+                className="whitespace-nowrap px-6 py-2.5 text-[15px] font-semibold"
+              >
+                {testHeroLink.label}
+              </Link>
             </div>
           </div>
           <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
@@ -92,6 +100,13 @@ export default function Header() {
                 {label}
               </a>
             ))}
+            <Link
+              to={testHeroLink.to}
+              onClick={() => setMenuOpen(false)}
+              className="flex min-h-11 items-center rounded-xl px-3 text-[15px] font-semibold transition-colors hover:bg-[rgb(240,245,255)]"
+            >
+              {testHeroLink.label}
+            </Link>
           </div>
           <div className="mt-auto flex flex-col gap-1 px-4 pb-6 sm:px-8">
             <a
