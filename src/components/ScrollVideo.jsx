@@ -262,18 +262,18 @@ export default function ScrollVideo() {
 
         {/* Scene C: closing CTA over the in-app frame, fades in near the end of the clip */}
         <div ref={phaseCRef} style={{ opacity: 0, transition: "opacity 0.6s ease-out" }} className="absolute inset-0">
-          <div className="absolute inset-x-0 bottom-[10%] flex flex-col items-center gap-4 px-6 text-center sm:bottom-[14%]">
-            <h2 className="text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-[56px] lg:leading-[1.05]">
+          <div className="absolute inset-x-0 bottom-[10%] flex flex-col items-center gap-6 px-6 text-center sm:bottom-[14%] lg:gap-8">
+            <h2 className="bg-gradient-to-b from-white to-[#4F95FF] bg-clip-text text-4xl font-semibold leading-[1.05] tracking-tight text-transparent sm:text-5xl lg:text-[104px] lg:leading-[0.85] lg:tracking-[-0.06em]">
               This is what VR
               <br />
               should feel like
             </h2>
-            <span className="text-xs uppercase tracking-wide text-white/60 sm:text-sm lg:text-[16px]">
+            <span className="text-sm font-normal uppercase text-white/70 md:text-base lg:text-[16px]">
               Thousands of worlds. One seamless interface.
             </span>
             <a
               href={FREE_DOWNLOAD_URL}
-              className="mt-2 flex h-11 w-fit items-center rounded-[100px] bg-[rgb(79,149,255)] px-6 py-1 font-sans text-[16px] font-medium uppercase text-white transition-colors hover:bg-[rgb(62,121,214)]"
+              className="flex h-11 w-fit items-center rounded-[100px] bg-[rgb(79,149,255)] px-6 py-1 font-sans text-[16px] font-medium uppercase text-white transition-colors hover:bg-[rgb(62,121,214)]"
             >
               Free Download
             </a>
