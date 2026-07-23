@@ -31,15 +31,32 @@ const itemStyle = () => ({
   transitionDuration: `${EXIT_DURATION_MS}ms`,
 });
 
-// Scroll-cue circles: 5% white fill, with the border itself a 135deg
-// gradient fading from 50% to 0% white (top-left to bottom-right). A plain
-// `border` can't take a gradient, so this layers a flat-color fill clipped
-// to the padding-box under a gradient clipped to the border-box.
-const circleGradientBorderStyle = {
-  border: "1px solid transparent",
-  background:
-    "linear-gradient(rgba(255,255,255,0.05), rgba(255,255,255,0.05)) padding-box, linear-gradient(135deg, rgba(255,255,255,0.5), rgba(255,255,255,0)) border-box",
-};
+// Scroll-cue circles: 5% white fill with a 135deg gradient ring (50% white
+// fading to 0%, top-left to bottom-right). Layering the gradient as a second
+// background under the translucent fill let it bleed through into the whole
+// interior (a low-alpha top layer doesn't fully mask what's behind it), so
+// instead the ring is a separate absolutely-positioned layer whose gradient
+// is clipped to just the 1px band via mask-composite — it never touches the
+// interior at all, regardless of the fill's opacity.
+function ScrollCueCircle({ className, children }) {
+  return (
+    <div className={`relative shrink-0 rounded-full ${className ?? ""}`}>
+      <div className="absolute inset-0 rounded-full bg-white/5 backdrop-blur-[5px]" />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 rounded-full"
+        style={{
+          padding: "1px",
+          background: "linear-gradient(135deg, rgba(255,255,255,0.5), rgba(255,255,255,0))",
+          WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+          WebkitMaskComposite: "xor",
+          maskComposite: "exclude",
+        }}
+      />
+      <div className="relative flex h-full w-full flex-col items-center justify-center gap-1">{children}</div>
+    </div>
+  );
+}
 
 function animateItems(refs, visible) {
   refs.current.forEach((el, index) => {
@@ -281,13 +298,10 @@ export default function ScrollVideo() {
             style={itemStyle()}
             className="absolute left-1/2 bottom-8 hidden -translate-x-1/2 flex-col items-center gap-2 sm:bottom-12 sm:flex"
           >
-            <div
-              style={circleGradientBorderStyle}
-              className="flex h-20 w-20 flex-col items-center justify-center gap-1 rounded-full text-[11px] font-medium uppercase tracking-wide text-white backdrop-blur-[5px] sm:h-24 sm:w-24 lg:h-[200px] lg:w-[200px] lg:text-[16px]"
-            >
+            <ScrollCueCircle className="h-20 w-20 text-[11px] font-medium uppercase tracking-wide text-white sm:h-24 sm:w-24 lg:h-[200px] lg:w-[200px] lg:text-[16px]">
               <span>Discover</span>
               <span aria-hidden="true">↓</span>
-            </div>
+            </ScrollCueCircle>
           </div>
         </div>
 
@@ -352,13 +366,10 @@ export default function ScrollVideo() {
               style={itemStyle()}
               className="flex flex-col items-start gap-2"
             >
-              <div
-                style={circleGradientBorderStyle}
-                className="flex h-20 w-20 flex-col items-center justify-center gap-1 rounded-full text-center text-[11px] font-medium uppercase tracking-wide text-white backdrop-blur-[5px] sm:h-24 sm:w-24 lg:h-[200px] lg:w-[200px] lg:text-[16px]"
-              >
+              <ScrollCueCircle className="h-20 w-20 text-center text-[11px] font-medium uppercase tracking-wide text-white sm:h-24 sm:w-24 lg:h-[200px] lg:w-[200px] lg:text-[16px]">
                 <span>Keep scrolling</span>
                 <span aria-hidden="true">↓</span>
-              </div>
+              </ScrollCueCircle>
             </div>
           </div>
         </div>
