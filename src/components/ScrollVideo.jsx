@@ -4,10 +4,31 @@ const SCROLL_VIDEO_SRC = "/assets/hero-video-scroll.mp4";
 const START_FRAME_IMAGE = "/assets/image 5.jpg";
 const END_FRAME_IMAGE = "/assets/hero-video-scroll-end-frame.jpg";
 const END_THRESHOLD = 0.999;
-const PHASE_THRESHOLD = 0.45;
-const PHASE_C_THRESHOLD = 0.85;
+const PHASE_THRESHOLD = 0.35;
+const PHASE_C_THRESHOLD = 0.7;
 const FREE_DOWNLOAD_URL =
   "https://vibecoding-test-task-infomediji-14m2u3eyf-marharytaaniskazxc.vercel.app/#dont-think-twice";
+
+// Each scene's text groups fade + slide up (opacity 0 -> 1, translateY(20px) -> 0)
+// as their scene becomes active, with a small per-item stagger on the way in.
+// The stagger only applies when appearing — applying it on the way out too
+// would leave the outgoing scene's items lingering (and overlapping the next
+// scene, which enters immediately) for as long as the last item's delay.
+const STAGGER_MS = 90;
+const itemStyle = () => ({
+  opacity: 0,
+  transform: "translateY(20px)",
+  transition: "opacity 0.6s ease-out, transform 0.6s ease-out",
+});
+
+function animateItems(refs, visible) {
+  refs.current.forEach((el, index) => {
+    if (!el) return;
+    el.style.transitionDelay = visible ? `${index * STAGGER_MS}ms` : "0ms";
+    el.style.opacity = visible ? "1" : "0";
+    el.style.transform = visible ? "translateY(0px)" : "translateY(20px)";
+  });
+}
 
 export default function ScrollVideo() {
   const sectionRef = useRef(null);
@@ -17,6 +38,9 @@ export default function ScrollVideo() {
   const phaseARef = useRef(null);
   const phaseBRef = useRef(null);
   const phaseCRef = useRef(null);
+  const phaseAItemRefs = useRef([]);
+  const phaseBItemRefs = useRef([]);
+  const phaseCItemRefs = useRef([]);
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
@@ -91,22 +115,17 @@ export default function ScrollVideo() {
       // The overlay reads as three scenes that crossfade through the clip
       // (title/stats, then the headset pitch, then the closing CTA over the
       // in-app frame), driven by the same scroll progress that scrubs the
-      // video — no separate observer.
+      // video — no separate observer. Each scene's own text groups fade +
+      // slide in via animateItems once their scene is active.
       const phaseCVisible = progress >= PHASE_C_THRESHOLD;
       const phaseBVisible = progress >= PHASE_THRESHOLD && !phaseCVisible;
       const phaseAVisible = !phaseBVisible && !phaseCVisible;
-      if (phaseARef.current) {
-        phaseARef.current.style.opacity = phaseAVisible ? "1" : "0";
-        phaseARef.current.style.pointerEvents = phaseAVisible ? "auto" : "none";
-      }
-      if (phaseBRef.current) {
-        phaseBRef.current.style.opacity = phaseBVisible ? "1" : "0";
-        phaseBRef.current.style.pointerEvents = phaseBVisible ? "auto" : "none";
-      }
-      if (phaseCRef.current) {
-        phaseCRef.current.style.opacity = phaseCVisible ? "1" : "0";
-        phaseCRef.current.style.pointerEvents = phaseCVisible ? "auto" : "none";
-      }
+      if (phaseARef.current) phaseARef.current.style.pointerEvents = phaseAVisible ? "auto" : "none";
+      if (phaseBRef.current) phaseBRef.current.style.pointerEvents = phaseBVisible ? "auto" : "none";
+      if (phaseCRef.current) phaseCRef.current.style.pointerEvents = phaseCVisible ? "auto" : "none";
+      animateItems(phaseAItemRefs, phaseAVisible);
+      animateItems(phaseBItemRefs, phaseBVisible);
+      animateItems(phaseCItemRefs, phaseCVisible);
     };
 
     const onScroll = () => {
@@ -147,9 +166,15 @@ export default function ScrollVideo() {
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/45 via-transparent to-black/45" />
 
         {/* Scene A: hero title, download CTA, onboarding blurb and headline stats */}
-        <div ref={phaseARef} style={{ opacity: 1, transition: "opacity 0.6s ease-out" }} className="absolute inset-0">
-          <div className="absolute left-6 top-24 flex max-w-xl flex-col gap-6 sm:left-10 sm:top-28 lg:left-[56px] lg:top-[156px] lg:gap-8">
-            <h1 className="bg-gradient-to-bl from-white to-[#B7D3FF] bg-clip-text text-4xl font-semibold leading-[1.05] tracking-tight text-transparent sm:text-5xl lg:text-[104px] lg:leading-[0.85] lg:tracking-[-0.06em]">
+        <div ref={phaseARef} className="absolute inset-0">
+          <div
+            ref={(el) => {
+              phaseAItemRefs.current[0] = el;
+            }}
+            style={itemStyle()}
+            className="absolute left-6 top-24 flex max-w-xl flex-col gap-6 sm:left-10 sm:top-28 lg:left-[56px] lg:top-[156px] lg:gap-8"
+          >
+            <h1 className="bg-[linear-gradient(106deg,#fff_14.34%,#4F95FF_132.13%)] bg-clip-text text-4xl font-semibold leading-[1.05] tracking-tight text-transparent sm:text-5xl lg:text-[104px] lg:leading-[0.85] lg:tracking-[-0.06em]">
               Most robust
               <br />
               and simple
@@ -165,7 +190,13 @@ export default function ScrollVideo() {
             </a>
           </div>
 
-          <div className="absolute left-6 bottom-10 hidden max-w-sm flex-col gap-2 sm:left-10 sm:bottom-14 lg:left-[56px] lg:flex lg:gap-5">
+          <div
+            ref={(el) => {
+              phaseAItemRefs.current[1] = el;
+            }}
+            style={itemStyle()}
+            className="absolute left-6 bottom-10 hidden max-w-sm flex-col gap-2 sm:left-10 sm:bottom-14 lg:left-[56px] lg:flex lg:gap-5"
+          >
             <h3 className="text-lg font-semibold text-white sm:text-xl lg:text-[32px] lg:leading-[0.9] lg:tracking-[-0.06em]">
               Zero friction, from day one.
             </h3>
@@ -178,7 +209,12 @@ export default function ScrollVideo() {
           </div>
 
           <div className="absolute right-6 top-24 bottom-10 hidden max-w-[280px] flex-col justify-between sm:right-10 lg:right-[56px] lg:top-[156px] lg:bottom-[56px] lg:flex">
-            <div>
+            <div
+              ref={(el) => {
+                phaseAItemRefs.current[2] = el;
+              }}
+              style={itemStyle()}
+            >
               <div className="text-3xl font-semibold text-white lg:text-[48px] lg:leading-[0.9] lg:tracking-[-0.06em]">
                 10M+
               </div>
@@ -187,7 +223,12 @@ export default function ScrollVideo() {
                 community that keeps growing every single day.
               </p>
             </div>
-            <div>
+            <div
+              ref={(el) => {
+                phaseAItemRefs.current[3] = el;
+              }}
+              style={itemStyle()}
+            >
               <div className="text-3xl font-semibold text-white lg:text-[48px] lg:leading-[0.9] lg:tracking-[-0.06em]">
                 500K+
               </div>
@@ -196,7 +237,12 @@ export default function ScrollVideo() {
                 discovering new worlds inside DeoVR right now.
               </p>
             </div>
-            <div>
+            <div
+              ref={(el) => {
+                phaseAItemRefs.current[4] = el;
+              }}
+              style={itemStyle()}
+            >
               <div className="text-3xl font-semibold text-white lg:text-[48px] lg:leading-[0.9] lg:tracking-[-0.06em]">
                 190+
               </div>
@@ -207,8 +253,14 @@ export default function ScrollVideo() {
             </div>
           </div>
 
-          <div className="absolute left-1/2 bottom-8 hidden -translate-x-1/2 flex-col items-center gap-2 sm:bottom-12 sm:flex">
-            <div className="flex h-20 w-20 flex-col items-center justify-center gap-1 rounded-full border border-white/20 bg-white/5 text-[11px] font-medium uppercase tracking-wide text-white backdrop-blur-sm sm:h-24 sm:w-24 lg:h-[200px] lg:w-[200px] lg:text-[16px]">
+          <div
+            ref={(el) => {
+              phaseAItemRefs.current[5] = el;
+            }}
+            style={itemStyle()}
+            className="absolute left-1/2 bottom-8 hidden -translate-x-1/2 flex-col items-center gap-2 sm:bottom-12 sm:flex"
+          >
+            <div className="flex h-20 w-20 flex-col items-center justify-center gap-1 rounded-full border border-white bg-white/10 text-[11px] font-medium uppercase tracking-wide text-white backdrop-blur-[5px] sm:h-24 sm:w-24 lg:h-[200px] lg:w-[200px] lg:text-[16px]">
               <span>Discover</span>
               <span aria-hidden="true">↓</span>
             </div>
@@ -216,22 +268,40 @@ export default function ScrollVideo() {
         </div>
 
         {/* Scene B: cross-platform headset pitch, fades in once the clip turns to profile */}
-        <div ref={phaseBRef} style={{ opacity: 0, transition: "opacity 0.6s ease-out" }} className="absolute inset-0">
+        <div ref={phaseBRef} className="absolute inset-0">
           <div className="absolute right-6 top-24 bottom-10 hidden max-w-lg flex-col justify-between sm:right-10 sm:top-28 lg:right-[56px] lg:top-[156px] lg:bottom-[56px] lg:flex lg:max-w-2xl xl:right-24">
             <div>
-              <h2 className="bg-gradient-to-bl from-white to-[#B7D3FF] bg-clip-text text-3xl font-semibold leading-tight text-transparent sm:text-4xl lg:text-[80px] lg:leading-[0.85] lg:tracking-[-0.06em]">
+              <h2
+                ref={(el) => {
+                  phaseBItemRefs.current[0] = el;
+                }}
+                style={itemStyle()}
+                className="bg-[linear-gradient(106deg,#fff_14.34%,#4F95FF_132.13%)] bg-clip-text text-3xl font-semibold leading-tight text-transparent sm:text-4xl lg:text-[80px] lg:leading-[0.85] lg:tracking-[-0.06em]"
+              >
                 Built for every
                 <br />
                 headset
               </h2>
-              <p className="mt-4 text-xs uppercase text-white/50 sm:text-sm sm:mt-6 md:text-base lg:mt-8 lg:text-[16px]">
+              <p
+                ref={(el) => {
+                  phaseBItemRefs.current[1] = el;
+                }}
+                style={itemStyle()}
+                className="mt-4 text-xs uppercase text-white/50 sm:text-sm sm:mt-6 md:text-base lg:mt-8 lg:text-[16px]"
+              >
                 From <span className="font-semibold text-white/90">Quest</span> to{" "}
                 <span className="font-semibold text-white/90">Vision Pro</span>, from{" "}
                 <span className="font-semibold text-white/90">PSVR2</span> to{" "}
                 <span className="font-semibold text-white/90">Pico</span> — DeoVR runs everywhere your favorite
                 headset does. No plugins, no conversion, no waiting. Just put it on and press play.
               </p>
-              <div className="mt-6 flex gap-10 sm:gap-14 lg:mt-20">
+              <div
+                ref={(el) => {
+                  phaseBItemRefs.current[2] = el;
+                }}
+                style={itemStyle()}
+                className="mt-6 flex gap-10 sm:gap-14 lg:mt-20"
+              >
                 <div>
                   <div className="text-2xl font-semibold text-white sm:text-3xl lg:text-[48px] lg:leading-[0.9] lg:tracking-[-0.06em]">
                     8K / 120 FPS
@@ -251,8 +321,14 @@ export default function ScrollVideo() {
               </div>
             </div>
 
-            <div className="flex flex-col items-start gap-2">
-              <div className="flex h-20 w-20 flex-col items-center justify-center gap-1 rounded-full border border-white/20 bg-white/5 text-center text-[11px] font-medium uppercase tracking-wide text-white backdrop-blur-sm sm:h-24 sm:w-24 lg:h-[200px] lg:w-[200px] lg:text-[16px]">
+            <div
+              ref={(el) => {
+                phaseBItemRefs.current[3] = el;
+              }}
+              style={itemStyle()}
+              className="flex flex-col items-start gap-2"
+            >
+              <div className="flex h-20 w-20 flex-col items-center justify-center gap-1 rounded-full border border-white bg-white/10 text-center text-[11px] font-medium uppercase tracking-wide text-white backdrop-blur-[5px] sm:h-24 sm:w-24 lg:h-[200px] lg:w-[200px] lg:text-[16px]">
                 <span>Keep scrolling</span>
                 <span aria-hidden="true">↓</span>
               </div>
@@ -261,17 +337,33 @@ export default function ScrollVideo() {
         </div>
 
         {/* Scene C: closing CTA over the in-app frame, fades in near the end of the clip */}
-        <div ref={phaseCRef} style={{ opacity: 0, transition: "opacity 0.6s ease-out" }} className="absolute inset-0">
+        <div ref={phaseCRef} className="absolute inset-0">
           <div className="absolute inset-x-0 bottom-10 flex flex-col items-center gap-6 px-6 text-center sm:bottom-14 lg:bottom-[56px] lg:gap-8">
-            <h2 className="bg-gradient-to-bl from-white to-[#B7D3FF] bg-clip-text text-4xl font-semibold leading-[1.05] tracking-tight text-transparent sm:text-5xl lg:text-[80px] lg:leading-[0.85] lg:tracking-[-0.06em]">
+            <h2
+              ref={(el) => {
+                phaseCItemRefs.current[0] = el;
+              }}
+              style={itemStyle()}
+              className="bg-[linear-gradient(106deg,#fff_14.34%,#4F95FF_132.13%)] bg-clip-text text-4xl font-semibold leading-[1.05] tracking-tight text-transparent sm:text-5xl lg:text-[80px] lg:leading-[0.85] lg:tracking-[-0.06em]"
+            >
               This is what VR
               <br />
               should feel like
             </h2>
-            <span className="text-sm font-normal uppercase text-white/70 md:text-base lg:text-[16px]">
+            <span
+              ref={(el) => {
+                phaseCItemRefs.current[1] = el;
+              }}
+              style={itemStyle()}
+              className="text-sm font-normal uppercase text-white/70 md:text-base lg:text-[16px]"
+            >
               Thousands of worlds. One seamless interface.
             </span>
             <a
+              ref={(el) => {
+                phaseCItemRefs.current[2] = el;
+              }}
+              style={itemStyle()}
               href={FREE_DOWNLOAD_URL}
               className="flex h-11 w-fit items-center rounded-[100px] bg-[rgb(79,149,255)] px-6 py-1 font-sans text-[16px] font-medium uppercase text-white transition-colors hover:bg-[rgb(62,121,214)]"
             >
