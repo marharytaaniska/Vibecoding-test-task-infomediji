@@ -208,39 +208,39 @@ export default function ScrollVideo() {
 
         {/* Scene B: cross-platform headset pitch, fades in once the clip turns to profile */}
         <div ref={phaseBRef} style={{ opacity: 0, transition: "opacity 0.6s ease-out" }} className="absolute inset-0">
-          <div className="absolute right-6 top-1/2 hidden max-w-lg -translate-y-1/2 flex-col gap-6 sm:right-10 lg:right-16 lg:flex lg:max-w-2xl xl:right-24">
-            <h2 className="text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-[80px] lg:leading-[0.85] lg:tracking-[-0.06em]">
+          <div className="absolute right-6 top-24 hidden max-w-lg flex-col sm:right-10 sm:top-28 lg:right-[56px] lg:top-[156px] lg:flex lg:max-w-2xl xl:right-24">
+            <h2 className="bg-gradient-to-b from-white to-[#4F95FF] bg-clip-text text-3xl font-semibold leading-tight text-transparent sm:text-4xl lg:text-[80px] lg:leading-[0.85] lg:tracking-[-0.06em]">
               Built for every
               <br />
               headset
             </h2>
-            <p className="text-xs uppercase text-white/50 sm:text-sm md:text-base">
+            <p className="mt-4 text-xs uppercase text-white/50 sm:text-sm sm:mt-6 md:text-base lg:mt-8 lg:text-[16px]">
               From <span className="font-semibold text-white/90">Quest</span> to{" "}
               <span className="font-semibold text-white/90">Vision Pro</span>, from{" "}
               <span className="font-semibold text-white/90">PSVR2</span> to{" "}
               <span className="font-semibold text-white/90">Pico</span> — DeoVR runs everywhere your favorite headset
               does. No plugins, no conversion, no waiting. Just put it on and press play.
             </p>
-            <div className="mt-4 flex gap-10 sm:gap-14">
+            <div className="mt-6 flex gap-10 sm:gap-14 lg:mt-20">
               <div>
                 <div className="text-2xl font-semibold text-white sm:text-3xl">8K / 120 FPS</div>
-                <p className="mt-1 text-xs uppercase tracking-wide text-white/50 sm:text-sm">
+                <p className="mt-1 text-xs uppercase tracking-wide text-white/50 sm:text-sm lg:mt-5 lg:text-[16px]">
                   Passthrough &amp; high-fidelity streaming supported
                 </p>
               </div>
               <div>
                 <div className="text-2xl font-semibold text-white sm:text-3xl">6+</div>
-                <p className="mt-1 text-xs uppercase tracking-wide text-white/50 sm:text-sm">
+                <p className="mt-1 text-xs uppercase tracking-wide text-white/50 sm:text-sm lg:mt-5 lg:text-[16px]">
                   Headset platforms supported
                 </p>
               </div>
             </div>
-          </div>
 
-          <div className="absolute left-1/2 bottom-8 hidden -translate-x-1/2 flex-col items-center gap-2 sm:bottom-12 sm:flex sm:left-[58%]">
-            <div className="flex h-20 w-20 flex-col items-center justify-center gap-1 rounded-full border border-white/20 bg-white/5 text-center text-[11px] font-medium uppercase tracking-wide text-white backdrop-blur-sm sm:h-24 sm:w-24 lg:h-[200px] lg:w-[200px] lg:text-[16px]">
-              <span>Keep scrolling</span>
-              <span aria-hidden="true">↓</span>
+            <div className="mt-12 flex flex-col items-start gap-2">
+              <div className="flex h-20 w-20 flex-col items-center justify-center gap-1 rounded-full border border-white/20 bg-white/5 text-center text-[11px] font-medium uppercase tracking-wide text-white backdrop-blur-sm sm:h-24 sm:w-24 lg:h-[200px] lg:w-[200px] lg:text-[16px]">
+                <span>Keep scrolling</span>
+                <span aria-hidden="true">↓</span>
+              </div>
             </div>
           </div>
         </div>
