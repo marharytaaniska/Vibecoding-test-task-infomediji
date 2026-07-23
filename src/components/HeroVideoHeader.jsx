@@ -5,19 +5,31 @@ const navLinks = ["DeoVR User", "DeoVR Developer", "Documentation", "Release Not
 
 export default function HeroVideoHeader() {
   const [scrolled, setScrolled] = useState(false);
+  const [touchingReviews, setTouchingReviews] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10);
+    const header = document.getElementById("site-header");
+    const onScroll = () => {
+      setScrolled(window.scrollY > 10);
+      const reviews = document.getElementById("reviews");
+      if (header && reviews) {
+        setTouchingReviews(reviews.getBoundingClientRect().top <= header.getBoundingClientRect().bottom);
+      }
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
   return (
     <div
       id="site-header"
       className={`fixed left-[round(calc(24px*var(--hero-scale)),1px)] right-[round(calc(24px*var(--hero-scale)),1px)] top-[round(calc(16px*var(--hero-scale)),1px)] z-[100] flex h-[round(calc(84px*var(--hero-scale)),1px)] items-center justify-between gap-[round(calc(8px*var(--hero-scale)),1px)] rounded-[round(calc(24px*var(--hero-scale)),1px)] px-[round(calc(32px*var(--hero-scale)),1px)] backdrop-blur-[round(calc(32px*var(--hero-scale)),1px)] transition-colors duration-300 ${
-        scrolled ? "bg-black/20" : "bg-white/5"
+        touchingReviews ? "bg-black" : scrolled ? "bg-black/20" : "bg-white/5"
       }`}
     >
       <Link to="/" className="shrink-0">
