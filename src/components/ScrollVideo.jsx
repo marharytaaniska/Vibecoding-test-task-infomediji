@@ -4,34 +4,17 @@ const SCROLL_VIDEO_SRC = "/assets/hero-video-scroll.mp4";
 const START_FRAME_IMAGE = "/assets/image 5.jpg";
 const END_FRAME_IMAGE = "/assets/hero-video-scroll-end-frame.jpg";
 const END_THRESHOLD = 0.999;
-const STATS_THRESHOLD = 0.6;
+const PHASE_THRESHOLD = 0.45;
 const FREE_DOWNLOAD_URL =
   "https://vibecoding-test-task-infomediji-14m2u3eyf-marharytaaniskazxc.vercel.app/#dont-think-twice";
-
-const statBlocks = [
-  {
-    value: "52,200+",
-    label: "Videos ready to stream, no setup required",
-    className: "top-24 right-6 max-w-[240px] text-right sm:top-28 sm:right-10 lg:right-16",
-  },
-  {
-    value: "6+",
-    label: "Headset platforms supported",
-    className: "bottom-10 left-6 max-w-[220px] sm:bottom-14 sm:left-10 lg:left-16",
-  },
-  {
-    value: "8K / 120 FPS",
-    label: "Passthrough & high-fidelity streaming supported",
-    className: "bottom-10 right-6 max-w-[240px] text-right sm:bottom-14 sm:right-10 lg:right-16",
-  },
-];
 
 export default function ScrollVideo() {
   const sectionRef = useRef(null);
   const stickyRef = useRef(null);
   const videoRef = useRef(null);
   const endFrameRef = useRef(null);
-  const statRefs = useRef([]);
+  const phaseARef = useRef(null);
+  const phaseBRef = useRef(null);
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
@@ -103,14 +86,18 @@ export default function ScrollVideo() {
         endFrameRef.current.style.opacity = progress >= END_THRESHOLD ? "1" : "0";
       }
 
-      // The stat callouts fade in once the subject turns to profile later in
-      // the clip, and fade back out symmetrically on scroll-up.
-      const statsVisible = progress >= STATS_THRESHOLD;
-      statRefs.current.forEach((el) => {
-        if (!el) return;
-        el.style.opacity = statsVisible ? "1" : "0";
-        el.style.transform = statsVisible ? "translateY(0px)" : "translateY(20px)";
-      });
+      // The overlay reads as two scenes that crossfade partway through the
+      // clip (title/stats, then the headset pitch), driven by the same
+      // scroll progress that scrubs the video — no separate observer.
+      const phaseBVisible = progress >= PHASE_THRESHOLD;
+      if (phaseARef.current) {
+        phaseARef.current.style.opacity = phaseBVisible ? "0" : "1";
+        phaseARef.current.style.pointerEvents = phaseBVisible ? "none" : "auto";
+      }
+      if (phaseBRef.current) {
+        phaseBRef.current.style.opacity = phaseBVisible ? "1" : "0";
+        phaseBRef.current.style.pointerEvents = phaseBVisible ? "auto" : "none";
+      }
     };
 
     const onScroll = () => {
@@ -150,35 +137,105 @@ export default function ScrollVideo() {
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/55 via-transparent to-black/60" />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/45 via-transparent to-black/45" />
 
-        <div className="absolute left-6 top-28 flex max-w-xl flex-col gap-6 sm:left-10 sm:top-32 lg:left-16">
-          <h1 className="text-4xl font-semibold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
-            Most robust and simple{" "}
-            <span className="bg-gradient-to-r from-sky-300 to-blue-400 bg-clip-text text-transparent">
-              VR player.
-            </span>
-          </h1>
-          <span className="text-sm font-normal text-white/70 md:text-base">Download for free. Any platform.</span>
-          <a
-            href={FREE_DOWNLOAD_URL}
-            className="flex h-11 w-fit items-center rounded-[100px] bg-[rgb(79,149,255)] px-6 py-1 font-sans text-[15px] font-semibold text-white transition-colors hover:bg-[rgb(62,121,214)]"
-          >
-            Free Download
-          </a>
+        {/* Scene A: hero title, download CTA, onboarding blurb and headline stats */}
+        <div ref={phaseARef} style={{ opacity: 1, transition: "opacity 0.6s ease-out" }} className="absolute inset-0">
+          <div className="absolute left-6 top-24 flex max-w-xl flex-col gap-6 sm:left-10 sm:top-28 lg:left-16">
+            <h1 className="bg-gradient-to-b from-white to-sky-200 bg-clip-text text-4xl font-semibold leading-[1.05] tracking-tight text-transparent sm:text-5xl lg:text-6xl">
+              Most robust
+              <br />
+              and simple
+              <br />
+              VR player
+            </h1>
+            <span className="text-sm font-normal text-white/70 md:text-base">Download for free. Any platform.</span>
+            <a
+              href={FREE_DOWNLOAD_URL}
+              className="flex h-11 w-fit items-center rounded-[100px] bg-[rgb(79,149,255)] px-6 py-1 font-sans text-[15px] font-semibold text-white transition-colors hover:bg-[rgb(62,121,214)]"
+            >
+              Free Download
+            </a>
+          </div>
+
+          <div className="absolute left-6 bottom-10 hidden max-w-sm flex-col gap-2 sm:left-10 sm:bottom-14 lg:left-16 lg:flex">
+            <h3 className="text-lg font-semibold text-white sm:text-xl">Zero friction, from day one.</h3>
+            <p className="text-xs text-white/50 sm:text-sm">
+              Install in under 60 seconds — <span className="font-semibold text-white/90">no account</span>, no setup required.
+            </p>
+            <a href="#" className="text-xs font-semibold text-white underline underline-offset-4 sm:text-sm">
+              Read more
+            </a>
+          </div>
+
+          <div className="absolute right-6 top-24 bottom-10 hidden max-w-[280px] flex-col justify-between sm:right-10 lg:right-16 lg:flex">
+            <div>
+              <div className="text-3xl font-semibold text-white lg:text-4xl">10M+</div>
+              <p className="mt-2 text-xs text-white/50 sm:text-sm">
+                <span className="font-semibold text-white/90">Downloads worldwide</span> — and counting. Join a
+                community that keeps growing every single day.
+              </p>
+            </div>
+            <div>
+              <div className="text-3xl font-semibold text-white lg:text-4xl">500K+</div>
+              <p className="mt-2 text-xs text-white/50 sm:text-sm">
+                <span className="font-semibold text-white/90">Monthly active users</span> streaming, exploring, and
+                discovering new worlds inside DeoVR right now.
+              </p>
+            </div>
+            <div>
+              <div className="text-3xl font-semibold text-white lg:text-4xl">190+</div>
+              <p className="mt-2 text-xs text-white/50 sm:text-sm">
+                <span className="font-semibold text-white/90">Countries</span> where people trust DeoVR as their
+                go-to VR player — from Tokyo to Toronto.
+              </p>
+            </div>
+          </div>
+
+          <div className="absolute left-1/2 bottom-8 hidden -translate-x-1/2 flex-col items-center gap-2 sm:bottom-12 sm:flex">
+            <div className="flex h-20 w-20 flex-col items-center justify-center gap-1 rounded-full border border-white/20 bg-white/5 text-[11px] font-medium uppercase tracking-wide text-white backdrop-blur-sm sm:h-24 sm:w-24">
+              <span>Discover</span>
+              <span aria-hidden="true">↓</span>
+            </div>
+          </div>
         </div>
 
-        {statBlocks.map((stat, index) => (
-          <div
-            key={stat.value}
-            ref={(el) => {
-              statRefs.current[index] = el;
-            }}
-            style={{ opacity: 0, transform: "translateY(20px)", transition: "opacity 0.5s ease-out, transform 0.5s ease-out" }}
-            className={`absolute flex flex-col gap-2 ${stat.className}`}
-          >
-            <span className="text-4xl font-semibold text-white sm:text-5xl">{stat.value}</span>
-            <span className="text-xs uppercase tracking-wide text-white/60 sm:text-sm">{stat.label}</span>
+        {/* Scene B: cross-platform headset pitch, fades in once the clip turns to profile */}
+        <div ref={phaseBRef} style={{ opacity: 0, transition: "opacity 0.6s ease-out" }} className="absolute inset-0">
+          <div className="absolute right-6 top-1/2 hidden max-w-lg -translate-y-1/2 flex-col gap-6 sm:right-10 lg:right-16 lg:flex xl:right-24">
+            <h2 className="text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl">
+              Built for every
+              <br />
+              headset
+            </h2>
+            <p className="text-xs text-white/50 sm:text-sm md:text-base">
+              From <span className="font-semibold text-white/90">Quest</span> to{" "}
+              <span className="font-semibold text-white/90">Vision Pro</span>, from{" "}
+              <span className="font-semibold text-white/90">PSVR2</span> to{" "}
+              <span className="font-semibold text-white/90">Pico</span> — DeoVR runs everywhere your favorite headset
+              does. No plugins, no conversion, no waiting. Just put it on and press play.
+            </p>
+            <div className="mt-4 flex gap-10 sm:gap-14">
+              <div>
+                <div className="text-2xl font-semibold text-white sm:text-3xl">8K / 120 FPS</div>
+                <p className="mt-1 text-xs uppercase tracking-wide text-white/50 sm:text-sm">
+                  Passthrough &amp; high-fidelity streaming supported
+                </p>
+              </div>
+              <div>
+                <div className="text-2xl font-semibold text-white sm:text-3xl">6+</div>
+                <p className="mt-1 text-xs uppercase tracking-wide text-white/50 sm:text-sm">
+                  Headset platforms supported
+                </p>
+              </div>
+            </div>
           </div>
-        ))}
+
+          <div className="absolute left-1/2 bottom-8 hidden -translate-x-1/2 flex-col items-center gap-2 sm:bottom-12 sm:flex sm:left-[58%]">
+            <div className="flex h-20 w-20 flex-col items-center justify-center gap-1 rounded-full border border-white/20 bg-white/5 text-center text-[11px] font-medium uppercase tracking-wide text-white backdrop-blur-sm sm:h-24 sm:w-24">
+              <span>Keep scrolling</span>
+              <span aria-hidden="true">↓</span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
