@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 const SCROLL_VIDEO_SRC = "/assets/hero-video-scroll.mp4";
 const START_FRAME_IMAGE = "/assets/image 5.jpg";
-const END_FRAME_IMAGE = "/assets/image 8.jpg";
+const END_FRAME_IMAGE = "/assets/hero-video-scroll-end-frame.jpg";
 const END_THRESHOLD = 0.999;
 const STATS_THRESHOLD = 0.6;
 const FREE_DOWNLOAD_URL =
