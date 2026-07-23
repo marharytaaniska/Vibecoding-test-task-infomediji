@@ -139,7 +139,7 @@ export default function ScrollVideo() {
 
         {/* Scene A: hero title, download CTA, onboarding blurb and headline stats */}
         <div ref={phaseARef} style={{ opacity: 1, transition: "opacity 0.6s ease-out" }} className="absolute inset-0">
-          <div className="absolute left-6 top-24 flex max-w-xl flex-col gap-6 sm:left-10 sm:top-28 lg:left-16 lg:gap-8">
+          <div className="absolute left-6 top-24 flex max-w-xl flex-col gap-6 sm:left-10 sm:top-28 lg:left-[56px] lg:top-[156px] lg:gap-8">
             <h1 className="bg-gradient-to-b from-white to-sky-200 bg-clip-text text-4xl font-semibold leading-[1.05] tracking-tight text-transparent sm:text-5xl lg:text-[104px] lg:leading-[0.85] lg:tracking-[-0.06em]">
               Most robust
               <br />
@@ -156,7 +156,7 @@ export default function ScrollVideo() {
             </a>
           </div>
 
-          <div className="absolute left-6 bottom-10 hidden max-w-sm flex-col gap-2 sm:left-10 sm:bottom-14 lg:left-16 lg:flex lg:gap-5">
+          <div className="absolute left-6 bottom-10 hidden max-w-sm flex-col gap-2 sm:left-10 sm:bottom-14 lg:left-[56px] lg:flex lg:gap-5">
             <h3 className="text-lg font-semibold text-white sm:text-xl lg:text-[32px] lg:leading-[0.9] lg:tracking-[-0.06em]">
               Zero friction, from day one.
             </h3>
@@ -168,7 +168,7 @@ export default function ScrollVideo() {
             </a>
           </div>
 
-          <div className="absolute right-6 top-24 bottom-10 hidden max-w-[280px] flex-col justify-between sm:right-10 lg:right-16 lg:flex">
+          <div className="absolute right-6 top-24 bottom-10 hidden max-w-[280px] flex-col justify-between sm:right-10 lg:right-[56px] lg:top-[156px] lg:bottom-[56px] lg:flex">
             <div>
               <div className="text-3xl font-semibold text-white lg:text-[48px] lg:leading-[0.9] lg:tracking-[-0.06em]">
                 10M+

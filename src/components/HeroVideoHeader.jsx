@@ -6,17 +6,17 @@ export default function HeroVideoHeader() {
   return (
     <div
       id="site-header"
-      className="fixed left-6 right-6 top-4 z-[100] flex h-[84px] items-center justify-between gap-2 bg-white/10 px-8 backdrop-blur-[32px]"
+      className="fixed left-6 right-6 top-4 z-[100] flex h-[84px] items-center justify-between gap-2 rounded-[24px] bg-white/10 px-8 backdrop-blur-[32px]"
     >
       <Link to="/" className="shrink-0">
-        <img src="/assets/logo-wordmark.png" alt="DeoVR" className="h-[34px] w-auto object-contain" />
+        <img src="/assets/logo-wordmark.png" alt="DeoVR" className="h-[34px] w-auto object-contain brightness-0 invert" />
       </Link>
       <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-2 xl:flex">
         {navLinks.map((label) => (
           <a
             key={label}
             href="#"
-            className="whitespace-nowrap px-5 py-2.5 text-[16px] font-medium text-white/80 transition-colors hover:text-white"
+            className="whitespace-nowrap px-5 py-2.5 text-[16px] font-medium uppercase text-white/80 transition-colors hover:text-white"
           >
             {label}
           </a>
