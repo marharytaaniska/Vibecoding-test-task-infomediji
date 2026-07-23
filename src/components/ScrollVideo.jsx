@@ -93,6 +93,26 @@ export default function ScrollVideo() {
     return () => video.removeEventListener("loadedmetadata", onLoadedMetadata);
   }, []);
 
+  // Keep the page pinned to the first frame (shown via the video's poster)
+  // until the video has loaded enough to scrub — otherwise the user can
+  // scroll straight through the tall section before the scroll listener
+  // below is even attached, which skips the video entirely. The actual
+  // scrolling element here is <html>, not <body> (index.css only sets
+  // overflow-x on html, leaving it as the default vertical scroller), so
+  // locking body alone does nothing — html has to be locked too.
+  useEffect(() => {
+    if (isReady) return undefined;
+    const html = document.documentElement;
+    const { overflow: htmlOverflow } = html.style;
+    const { overflow: bodyOverflow } = document.body.style;
+    html.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
+    return () => {
+      html.style.overflow = htmlOverflow;
+      document.body.style.overflow = bodyOverflow;
+    };
+  }, [isReady]);
+
   // position:sticky can't be used here: the site sets `overflow-x: hidden` on
   // html/body (to stop the coverflow carousel from causing mobile horizontal
   // scroll), which makes those elements the sticky containing block instead
