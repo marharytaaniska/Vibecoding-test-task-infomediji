@@ -1,4 +1,3 @@
-import ScrollVideo from "../components/ScrollVideo";
 import Hero from "../components/Hero";
 import Stats from "../components/Stats";
 import Reviews from "../components/Reviews";
@@ -11,7 +10,6 @@ import Footer from "../components/Footer";
 function Home() {
   return (
     <>
-      <ScrollVideo />
       <Hero />
       <Stats />
       <Reviews />
