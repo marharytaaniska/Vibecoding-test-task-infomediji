@@ -39,7 +39,7 @@ export default function HeroVideoHeader() {
         </a>
         <a
           href="#"
-          className="whitespace-nowrap text-[16px] font-medium uppercase text-white transition-colors hover:text-white/80"
+          className="whitespace-nowrap px-4 text-[16px] font-medium uppercase text-white transition-colors hover:text-white/80"
         >
           Sign In
         </a>

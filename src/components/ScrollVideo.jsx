@@ -14,17 +14,28 @@ const FREE_DOWNLOAD_URL =
 // The stagger only applies when appearing — applying it on the way out too
 // would leave the outgoing scene's items lingering (and overlapping the next
 // scene, which enters immediately) for as long as the last item's delay.
+// Exit is quick (EXIT_DURATION_MS) with no delay, and entry is held back by
+// EXIT_DURATION_MS + BLANK_GAP_MS so there's a brief beat with no text at all
+// on screen, instead of the incoming scene appearing the instant the old one
+// starts leaving.
+const EXIT_DURATION_MS = 250;
+const BLANK_GAP_MS = 150;
+const ENTER_DELAY_MS = EXIT_DURATION_MS + BLANK_GAP_MS;
+const ENTER_DURATION_MS = 600;
 const STAGGER_MS = 90;
 const itemStyle = () => ({
   opacity: 0,
   transform: "translateY(20px)",
-  transition: "opacity 0.6s ease-out, transform 0.6s ease-out",
+  transitionProperty: "opacity, transform",
+  transitionTimingFunction: "ease-out",
+  transitionDuration: `${EXIT_DURATION_MS}ms`,
 });
 
 function animateItems(refs, visible) {
   refs.current.forEach((el, index) => {
     if (!el) return;
-    el.style.transitionDelay = visible ? `${index * STAGGER_MS}ms` : "0ms";
+    el.style.transitionDelay = visible ? `${ENTER_DELAY_MS + index * STAGGER_MS}ms` : "0ms";
+    el.style.transitionDuration = visible ? `${ENTER_DURATION_MS}ms` : `${EXIT_DURATION_MS}ms`;
     el.style.opacity = visible ? "1" : "0";
     el.style.transform = visible ? "translateY(0px)" : "translateY(20px)";
   });
@@ -174,7 +185,7 @@ export default function ScrollVideo() {
             style={itemStyle()}
             className="absolute left-6 top-24 flex max-w-xl flex-col gap-6 sm:left-10 sm:top-28 lg:left-[56px] lg:top-[156px] lg:gap-8"
           >
-            <h1 className="bg-[linear-gradient(106deg,#fff_14.34%,#4F95FF_132.13%)] bg-clip-text text-4xl font-semibold leading-[1.05] tracking-tight text-transparent sm:text-5xl lg:text-[104px] lg:leading-[0.85] lg:tracking-[-0.06em]">
+            <h1 className="bg-[linear-gradient(106deg,#fff_14.34%,#CEE1FF_132.13%)] bg-clip-text text-4xl font-semibold leading-[1.05] tracking-tight text-transparent sm:text-5xl lg:text-[104px] lg:leading-[0.85] lg:tracking-[-0.06em]">
               Most robust
               <br />
               and simple
@@ -260,7 +271,14 @@ export default function ScrollVideo() {
             style={itemStyle()}
             className="absolute left-1/2 bottom-8 hidden -translate-x-1/2 flex-col items-center gap-2 sm:bottom-12 sm:flex"
           >
-            <div className="flex h-20 w-20 flex-col items-center justify-center gap-1 rounded-full border border-white bg-white/10 text-[11px] font-medium uppercase tracking-wide text-white backdrop-blur-[5px] sm:h-24 sm:w-24 lg:h-[200px] lg:w-[200px] lg:text-[16px]">
+            <div
+              style={{
+                border: "1px solid transparent",
+                background:
+                  "linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0.1)) padding-box, linear-gradient(135deg, rgba(255,255,255,0.5), rgba(255,255,255,0)) border-box",
+              }}
+              className="flex h-20 w-20 flex-col items-center justify-center gap-1 rounded-full text-[11px] font-medium uppercase tracking-wide text-white backdrop-blur-[5px] sm:h-24 sm:w-24 lg:h-[200px] lg:w-[200px] lg:text-[16px]"
+            >
               <span>Discover</span>
               <span aria-hidden="true">↓</span>
             </div>
@@ -276,7 +294,7 @@ export default function ScrollVideo() {
                   phaseBItemRefs.current[0] = el;
                 }}
                 style={itemStyle()}
-                className="bg-[linear-gradient(106deg,#fff_14.34%,#4F95FF_132.13%)] bg-clip-text text-3xl font-semibold leading-tight text-transparent sm:text-4xl lg:text-[80px] lg:leading-[0.85] lg:tracking-[-0.06em]"
+                className="bg-[linear-gradient(106deg,#fff_14.34%,#CEE1FF_132.13%)] bg-clip-text text-3xl font-semibold leading-tight text-transparent sm:text-4xl lg:text-[80px] lg:leading-[0.85] lg:tracking-[-0.06em]"
               >
                 Built for every
                 <br />
@@ -344,7 +362,7 @@ export default function ScrollVideo() {
                 phaseCItemRefs.current[0] = el;
               }}
               style={itemStyle()}
-              className="bg-[linear-gradient(106deg,#fff_14.34%,#4F95FF_132.13%)] bg-clip-text text-4xl font-semibold leading-[1.05] tracking-tight text-transparent sm:text-5xl lg:text-[80px] lg:leading-[0.85] lg:tracking-[-0.06em]"
+              className="bg-[linear-gradient(106deg,#fff_14.34%,#CEE1FF_132.13%)] bg-clip-text text-4xl font-semibold leading-[1.05] tracking-tight text-transparent sm:text-5xl lg:text-[80px] lg:leading-[0.85] lg:tracking-[-0.06em]"
             >
               This is what VR
               <br />
