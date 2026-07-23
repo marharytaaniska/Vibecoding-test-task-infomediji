@@ -5,8 +5,10 @@ import Footer from "../components/Footer";
 function TestHeroSection() {
   return (
     <>
-      <HeroVideoHeader />
-      <ScrollVideo />
+      <div className="hero-scale">
+        <HeroVideoHeader />
+        <ScrollVideo />
+      </div>
       <Footer />
     </>
   );

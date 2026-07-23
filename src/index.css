@@ -9,6 +9,21 @@ html {
   --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
+/* Scales the Test hero section's header + scroll-video overlay (text sizes,
+   spacing, circle dimensions — anything built from calc(...*var(--hero-scale)))
+   proportionally with the viewport once it grows past the 1920px design
+   width, instead of staying pinned at their fixed px sizes on 4K/ultrawide
+   screens. Below 1920px everything renders at the original fixed sizes. */
+.hero-scale {
+  --hero-scale: 1;
+}
+
+@media (min-width: 1920px) {
+  .hero-scale {
+    --hero-scale: calc(100vw / 1920px);
+  }
+}
+
 body {
   margin: 0;
   overflow-x: hidden;

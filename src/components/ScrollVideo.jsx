@@ -230,19 +230,21 @@ export default function ScrollVideo() {
               phaseAItemRefs.current[0] = el;
             }}
             style={itemStyle()}
-            className="absolute left-6 top-24 flex max-w-xl flex-col gap-6 sm:left-10 sm:top-28 lg:left-[56px] lg:top-[156px] lg:gap-8"
+            className="absolute left-6 top-24 flex max-w-xl flex-col gap-6 sm:left-10 sm:top-28 lg:left-[calc(56px*var(--hero-scale))] lg:top-[calc(156px*var(--hero-scale))] lg:max-w-[calc(576px*var(--hero-scale))] lg:gap-[calc(32px*var(--hero-scale))]"
           >
-            <h1 className="bg-[linear-gradient(106deg,#fff_14.34%,#CEE1FF_132.13%)] bg-clip-text text-4xl font-semibold leading-[1.05] tracking-tight text-transparent sm:text-5xl lg:text-[104px] lg:leading-[0.85] lg:tracking-[-0.06em]">
+            <h1 className="bg-[linear-gradient(106deg,#fff_14.34%,#CEE1FF_132.13%)] bg-clip-text text-4xl font-semibold leading-[1.05] tracking-tight text-transparent sm:text-5xl lg:text-[calc(104px*var(--hero-scale))] lg:leading-[0.85] lg:tracking-[-0.06em]">
               Most robust
               <br />
               and simple
               <br />
               VR player
             </h1>
-            <span className="text-sm font-normal uppercase text-white/70 md:text-base lg:text-[16px]">Download for free. Any platform.</span>
+            <span className="text-sm font-normal uppercase text-white/70 md:text-base lg:text-[calc(16px*var(--hero-scale))]">
+              Download for free. Any platform.
+            </span>
             <a
               href={FREE_DOWNLOAD_URL}
-              className="flex h-11 w-fit items-center rounded-[100px] bg-[rgb(79,149,255)] px-6 py-1 font-sans text-[16px] font-medium uppercase text-white transition-colors hover:bg-[rgb(62,121,214)]"
+              className="flex h-11 w-fit items-center rounded-[100px] bg-[rgb(79,149,255)] px-6 py-1 font-sans text-[16px] font-medium uppercase text-white transition-colors hover:bg-[rgb(62,121,214)] lg:h-[calc(44px*var(--hero-scale))] lg:px-[calc(24px*var(--hero-scale))] lg:text-[calc(16px*var(--hero-scale))]"
             >
               Free Download
             </a>
@@ -253,30 +255,30 @@ export default function ScrollVideo() {
               phaseAItemRefs.current[1] = el;
             }}
             style={itemStyle()}
-            className="absolute left-6 bottom-10 hidden max-w-sm flex-col gap-2 sm:left-10 sm:bottom-14 lg:left-[56px] lg:flex lg:gap-5"
+            className="absolute left-6 bottom-10 hidden max-w-sm flex-col gap-2 sm:left-10 sm:bottom-14 lg:left-[calc(56px*var(--hero-scale))] lg:flex lg:max-w-[calc(384px*var(--hero-scale))] lg:gap-[calc(20px*var(--hero-scale))]"
           >
-            <h3 className="text-lg font-semibold text-white sm:text-xl lg:text-[32px] lg:leading-[0.9] lg:tracking-[-0.06em]">
+            <h3 className="text-lg font-semibold text-white sm:text-xl lg:text-[calc(32px*var(--hero-scale))] lg:leading-[0.9] lg:tracking-[-0.06em]">
               Zero friction, from day one.
             </h3>
-            <p className="text-xs uppercase text-white/50 sm:text-sm lg:text-[16px]">
+            <p className="text-xs uppercase text-white/50 sm:text-sm lg:text-[calc(16px*var(--hero-scale))]">
               Install in under 60 seconds — <span className="font-semibold text-white/90">no account</span>, no setup required.
             </p>
-            <a href="#" className="text-xs font-semibold uppercase text-white sm:text-sm lg:text-[16px]">
+            <a href="#" className="text-xs font-semibold uppercase text-white sm:text-sm lg:text-[calc(16px*var(--hero-scale))]">
               Read more
             </a>
           </div>
 
-          <div className="absolute right-6 top-24 bottom-10 hidden max-w-[280px] flex-col justify-between sm:right-10 lg:right-[56px] lg:top-[156px] lg:bottom-[56px] lg:flex">
+          <div className="absolute right-6 top-24 bottom-10 hidden max-w-[280px] flex-col justify-between sm:right-10 lg:right-[calc(56px*var(--hero-scale))] lg:top-[calc(156px*var(--hero-scale))] lg:bottom-[calc(56px*var(--hero-scale))] lg:flex lg:max-w-[calc(280px*var(--hero-scale))]">
             <div
               ref={(el) => {
                 phaseAItemRefs.current[2] = el;
               }}
               style={itemStyle()}
             >
-              <div className="text-3xl font-semibold text-white lg:text-[48px] lg:leading-[0.9] lg:tracking-[-0.06em]">
+              <div className="text-3xl font-semibold text-white lg:text-[calc(48px*var(--hero-scale))] lg:leading-[0.9] lg:tracking-[-0.06em]">
                 10M+
               </div>
-              <p className="mt-2 text-xs uppercase text-white/50 sm:text-sm lg:mt-5 lg:text-[16px]">
+              <p className="mt-2 text-xs uppercase text-white/50 sm:text-sm lg:mt-[calc(20px*var(--hero-scale))] lg:text-[calc(16px*var(--hero-scale))]">
                 <span className="font-semibold text-white/90">Downloads worldwide</span> — and counting. Join a
                 community that keeps growing every single day.
               </p>
@@ -287,10 +289,10 @@ export default function ScrollVideo() {
               }}
               style={itemStyle()}
             >
-              <div className="text-3xl font-semibold text-white lg:text-[48px] lg:leading-[0.9] lg:tracking-[-0.06em]">
+              <div className="text-3xl font-semibold text-white lg:text-[calc(48px*var(--hero-scale))] lg:leading-[0.9] lg:tracking-[-0.06em]">
                 500K+
               </div>
-              <p className="mt-2 text-xs uppercase text-white/50 sm:text-sm lg:mt-5 lg:text-[16px]">
+              <p className="mt-2 text-xs uppercase text-white/50 sm:text-sm lg:mt-[calc(20px*var(--hero-scale))] lg:text-[calc(16px*var(--hero-scale))]">
                 <span className="font-semibold text-white/90">Monthly active users</span> streaming, exploring, and
                 discovering new worlds inside DeoVR right now.
               </p>
@@ -301,10 +303,10 @@ export default function ScrollVideo() {
               }}
               style={itemStyle()}
             >
-              <div className="text-3xl font-semibold text-white lg:text-[48px] lg:leading-[0.9] lg:tracking-[-0.06em]">
+              <div className="text-3xl font-semibold text-white lg:text-[calc(48px*var(--hero-scale))] lg:leading-[0.9] lg:tracking-[-0.06em]">
                 190+
               </div>
-              <p className="mt-2 text-xs uppercase text-white/50 sm:text-sm lg:mt-5 lg:text-[16px]">
+              <p className="mt-2 text-xs uppercase text-white/50 sm:text-sm lg:mt-[calc(20px*var(--hero-scale))] lg:text-[calc(16px*var(--hero-scale))]">
                 <span className="font-semibold text-white/90">Countries</span> where people trust DeoVR as their
                 go-to VR player — from Tokyo to Toronto.
               </p>
@@ -318,7 +320,7 @@ export default function ScrollVideo() {
             style={itemStyle()}
             className="absolute left-1/2 bottom-8 hidden -translate-x-1/2 flex-col items-center gap-2 sm:bottom-12 sm:flex"
           >
-            <ScrollCueCircle className="h-20 w-20 text-[11px] font-medium uppercase tracking-wide text-white sm:h-24 sm:w-24 lg:h-[200px] lg:w-[200px] lg:text-[16px]">
+            <ScrollCueCircle className="h-20 w-20 text-[11px] font-medium uppercase tracking-wide text-white sm:h-24 sm:w-24 lg:h-[calc(200px*var(--hero-scale))] lg:w-[calc(200px*var(--hero-scale))] lg:text-[calc(16px*var(--hero-scale))]">
               <span>Discover</span>
               <span aria-hidden="true">↓</span>
             </ScrollCueCircle>
@@ -327,14 +329,14 @@ export default function ScrollVideo() {
 
         {/* Scene B: cross-platform headset pitch, fades in once the clip turns to profile */}
         <div ref={phaseBRef} className="absolute inset-0">
-          <div className="absolute right-6 top-24 bottom-10 hidden max-w-lg flex-col justify-between sm:right-10 sm:top-28 lg:right-[56px] lg:top-[156px] lg:bottom-[56px] lg:flex lg:max-w-2xl xl:right-24">
+          <div className="absolute right-6 top-24 bottom-10 hidden max-w-lg flex-col justify-between sm:right-10 sm:top-28 lg:right-[calc(56px*var(--hero-scale))] lg:top-[calc(156px*var(--hero-scale))] lg:bottom-[calc(56px*var(--hero-scale))] lg:flex lg:max-w-[calc(672px*var(--hero-scale))]">
             <div>
               <h2
                 ref={(el) => {
                   phaseBItemRefs.current[0] = el;
                 }}
                 style={itemStyle()}
-                className="bg-[linear-gradient(106deg,#fff_14.34%,#CEE1FF_132.13%)] bg-clip-text text-3xl font-semibold leading-tight text-transparent sm:text-4xl lg:text-[80px] lg:leading-[0.85] lg:tracking-[-0.06em]"
+                className="bg-[linear-gradient(106deg,#fff_14.34%,#CEE1FF_132.13%)] bg-clip-text text-3xl font-semibold leading-tight text-transparent sm:text-4xl lg:text-[calc(80px*var(--hero-scale))] lg:leading-[0.85] lg:tracking-[-0.06em]"
               >
                 Built for every
                 <br />
@@ -345,7 +347,7 @@ export default function ScrollVideo() {
                   phaseBItemRefs.current[1] = el;
                 }}
                 style={itemStyle()}
-                className="mt-4 text-xs uppercase text-white/50 sm:text-sm sm:mt-6 md:text-base lg:mt-8 lg:text-[16px]"
+                className="mt-4 text-xs uppercase text-white/50 sm:text-sm sm:mt-6 md:text-base lg:mt-[calc(32px*var(--hero-scale))] lg:text-[calc(16px*var(--hero-scale))]"
               >
                 From <span className="font-semibold text-white/90">Quest</span> to{" "}
                 <span className="font-semibold text-white/90">Vision Pro</span>, from{" "}
@@ -358,21 +360,21 @@ export default function ScrollVideo() {
                   phaseBItemRefs.current[2] = el;
                 }}
                 style={itemStyle()}
-                className="mt-6 flex gap-10 sm:gap-14 lg:mt-20"
+                className="mt-6 flex gap-10 sm:gap-14 lg:mt-[calc(80px*var(--hero-scale))] lg:gap-[calc(56px*var(--hero-scale))]"
               >
                 <div>
-                  <div className="text-2xl font-semibold text-white sm:text-3xl lg:text-[48px] lg:leading-[0.9] lg:tracking-[-0.06em]">
+                  <div className="text-2xl font-semibold text-white sm:text-3xl lg:text-[calc(48px*var(--hero-scale))] lg:leading-[0.9] lg:tracking-[-0.06em]">
                     8K / 120 FPS
                   </div>
-                  <p className="mt-1 text-xs uppercase tracking-wide text-white/50 sm:text-sm lg:mt-5 lg:text-[16px]">
+                  <p className="mt-1 text-xs uppercase tracking-wide text-white/50 sm:text-sm lg:mt-[calc(20px*var(--hero-scale))] lg:text-[calc(16px*var(--hero-scale))]">
                     Passthrough &amp; high-fidelity streaming supported
                   </p>
                 </div>
                 <div>
-                  <div className="text-2xl font-semibold text-white sm:text-3xl lg:text-[48px] lg:leading-[0.9] lg:tracking-[-0.06em]">
+                  <div className="text-2xl font-semibold text-white sm:text-3xl lg:text-[calc(48px*var(--hero-scale))] lg:leading-[0.9] lg:tracking-[-0.06em]">
                     6+
                   </div>
-                  <p className="mt-1 text-xs uppercase tracking-wide text-white/50 sm:text-sm lg:mt-5 lg:text-[16px]">
+                  <p className="mt-1 text-xs uppercase tracking-wide text-white/50 sm:text-sm lg:mt-[calc(20px*var(--hero-scale))] lg:text-[calc(16px*var(--hero-scale))]">
                     Headset platforms supported
                   </p>
                 </div>
@@ -386,7 +388,7 @@ export default function ScrollVideo() {
               style={itemStyle()}
               className="flex flex-col items-start gap-2"
             >
-              <ScrollCueCircle className="h-20 w-20 text-center text-[11px] font-medium uppercase tracking-wide text-white sm:h-24 sm:w-24 lg:h-[200px] lg:w-[200px] lg:text-[16px]">
+              <ScrollCueCircle className="h-20 w-20 text-center text-[11px] font-medium uppercase tracking-wide text-white sm:h-24 sm:w-24 lg:h-[calc(200px*var(--hero-scale))] lg:w-[calc(200px*var(--hero-scale))] lg:text-[calc(16px*var(--hero-scale))]">
                 <span>Keep scrolling</span>
                 <span aria-hidden="true">↓</span>
               </ScrollCueCircle>
@@ -396,13 +398,13 @@ export default function ScrollVideo() {
 
         {/* Scene C: closing CTA over the in-app frame, fades in near the end of the clip */}
         <div ref={phaseCRef} className="absolute inset-0">
-          <div className="absolute inset-x-0 bottom-10 flex flex-col items-center gap-6 px-6 text-center sm:bottom-14 lg:bottom-[56px] lg:gap-8">
+          <div className="absolute inset-x-0 bottom-10 flex flex-col items-center gap-6 px-6 text-center sm:bottom-14 lg:bottom-[calc(56px*var(--hero-scale))] lg:gap-[calc(32px*var(--hero-scale))]">
             <h2
               ref={(el) => {
                 phaseCItemRefs.current[0] = el;
               }}
               style={itemStyle()}
-              className="bg-[linear-gradient(106deg,#fff_14.34%,#CEE1FF_132.13%)] bg-clip-text text-4xl font-semibold leading-[1.05] tracking-tight text-transparent sm:text-5xl lg:text-[80px] lg:leading-[0.85] lg:tracking-[-0.06em]"
+              className="bg-[linear-gradient(106deg,#fff_14.34%,#CEE1FF_132.13%)] bg-clip-text text-4xl font-semibold leading-[1.05] tracking-tight text-transparent sm:text-5xl lg:text-[calc(80px*var(--hero-scale))] lg:leading-[0.85] lg:tracking-[-0.06em]"
             >
               This is what VR
               <br />
@@ -413,7 +415,7 @@ export default function ScrollVideo() {
                 phaseCItemRefs.current[1] = el;
               }}
               style={itemStyle()}
-              className="text-sm font-normal uppercase text-white/70 md:text-base lg:text-[16px]"
+              className="text-sm font-normal uppercase text-white/70 md:text-base lg:text-[calc(16px*var(--hero-scale))]"
             >
               Thousands of worlds. One seamless interface.
             </span>
@@ -423,7 +425,7 @@ export default function ScrollVideo() {
               }}
               style={itemStyle()}
               href={FREE_DOWNLOAD_URL}
-              className="flex h-11 w-fit items-center rounded-[100px] bg-[rgb(79,149,255)] px-6 py-1 font-sans text-[16px] font-medium uppercase text-white transition-colors hover:bg-[rgb(62,121,214)]"
+              className="flex h-11 w-fit items-center rounded-[100px] bg-[rgb(79,149,255)] px-6 py-1 font-sans text-[16px] font-medium uppercase text-white transition-colors hover:bg-[rgb(62,121,214)] lg:h-[calc(44px*var(--hero-scale))] lg:px-[calc(24px*var(--hero-scale))] lg:text-[calc(16px*var(--hero-scale))]"
             >
               Free Download
             </a>
