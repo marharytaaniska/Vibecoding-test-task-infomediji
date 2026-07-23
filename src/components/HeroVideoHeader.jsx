@@ -15,7 +15,7 @@ export default function HeroVideoHeader() {
           className="h-[round(calc(34px*var(--hero-scale)),1px)] w-auto object-contain brightness-0 invert"
         />
       </Link>
-      <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-[round(calc(8px*var(--hero-scale)),1px)] xl:flex">
+      <div className="absolute left-1/2 flex -translate-x-1/2 items-center gap-[round(calc(8px*var(--hero-scale)),1px)]">
         {navLinks.map((label) => (
           <a
             key={label}
@@ -36,7 +36,7 @@ export default function HeroVideoHeader() {
         </button>
         <a
           href="#"
-          className="hidden h-[round(calc(44px*var(--hero-scale)),1px)] shrink-0 items-center gap-[round(calc(8px*var(--hero-scale)),1px)] whitespace-nowrap rounded-full bg-white/10 px-[round(calc(20px*var(--hero-scale)),1px)] text-[round(calc(16px*var(--hero-scale)),1px)] font-medium uppercase text-white transition-colors hover:bg-white/20 sm:flex"
+          className="flex h-[round(calc(44px*var(--hero-scale)),1px)] shrink-0 items-center gap-[round(calc(8px*var(--hero-scale)),1px)] whitespace-nowrap rounded-full bg-white/10 px-[round(calc(20px*var(--hero-scale)),1px)] text-[round(calc(16px*var(--hero-scale)),1px)] font-medium uppercase text-white transition-colors hover:bg-white/20"
         >
           <img
             src="/uploads/Icon-download.svg"
