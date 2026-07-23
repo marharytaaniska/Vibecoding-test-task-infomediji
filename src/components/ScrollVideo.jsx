@@ -139,7 +139,7 @@ export default function ScrollVideo() {
 
         {/* Scene A: hero title, download CTA, onboarding blurb and headline stats */}
         <div ref={phaseARef} style={{ opacity: 1, transition: "opacity 0.6s ease-out" }} className="absolute inset-0">
-          <div className="absolute left-6 top-24 flex max-w-xl flex-col gap-6 sm:left-10 sm:top-28 lg:left-16">
+          <div className="absolute left-6 top-24 flex max-w-xl flex-col gap-6 sm:left-10 sm:top-28 lg:left-16 lg:gap-8">
             <h1 className="bg-gradient-to-b from-white to-sky-200 bg-clip-text text-4xl font-semibold leading-[1.05] tracking-tight text-transparent sm:text-5xl lg:text-[104px] lg:leading-[0.85] lg:tracking-[-0.06em]">
               Most robust
               <br />
@@ -147,10 +147,10 @@ export default function ScrollVideo() {
               <br />
               VR player
             </h1>
-            <span className="text-sm font-normal uppercase text-white/70 md:text-base">Download for free. Any platform.</span>
+            <span className="text-sm font-normal uppercase text-white/70 md:text-base lg:text-[16px]">Download for free. Any platform.</span>
             <a
               href={FREE_DOWNLOAD_URL}
-              className="flex h-11 w-fit items-center rounded-[100px] bg-[rgb(79,149,255)] px-6 py-1 font-sans text-[15px] font-semibold uppercase text-white transition-colors hover:bg-[rgb(62,121,214)]"
+              className="flex h-11 w-fit items-center rounded-[100px] bg-[rgb(79,149,255)] px-6 py-1 font-sans text-[16px] font-medium uppercase text-white transition-colors hover:bg-[rgb(62,121,214)]"
             >
               Free Download
             </a>
@@ -160,7 +160,7 @@ export default function ScrollVideo() {
             <h3 className="text-lg font-semibold text-white sm:text-xl lg:text-[32px] lg:leading-[0.9] lg:tracking-[-0.06em]">
               Zero friction, from day one.
             </h3>
-            <p className="text-xs uppercase text-white/50 sm:text-sm">
+            <p className="text-xs uppercase text-white/50 sm:text-sm lg:text-[16px]">
               Install in under 60 seconds — <span className="font-semibold text-white/90">no account</span>, no setup required.
             </p>
             <a href="#" className="text-xs font-semibold uppercase text-white underline underline-offset-4 sm:text-sm">
@@ -173,7 +173,7 @@ export default function ScrollVideo() {
               <div className="text-3xl font-semibold text-white lg:text-[48px] lg:leading-[0.9] lg:tracking-[-0.06em]">
                 10M+
               </div>
-              <p className="mt-2 text-xs uppercase text-white/50 sm:text-sm">
+              <p className="mt-2 text-xs uppercase text-white/50 sm:text-sm lg:mt-5 lg:text-[16px]">
                 <span className="font-semibold text-white/90">Downloads worldwide</span> — and counting. Join a
                 community that keeps growing every single day.
               </p>
@@ -182,7 +182,7 @@ export default function ScrollVideo() {
               <div className="text-3xl font-semibold text-white lg:text-[48px] lg:leading-[0.9] lg:tracking-[-0.06em]">
                 500K+
               </div>
-              <p className="mt-2 text-xs uppercase text-white/50 sm:text-sm">
+              <p className="mt-2 text-xs uppercase text-white/50 sm:text-sm lg:mt-5 lg:text-[16px]">
                 <span className="font-semibold text-white/90">Monthly active users</span> streaming, exploring, and
                 discovering new worlds inside DeoVR right now.
               </p>
@@ -191,7 +191,7 @@ export default function ScrollVideo() {
               <div className="text-3xl font-semibold text-white lg:text-[48px] lg:leading-[0.9] lg:tracking-[-0.06em]">
                 190+
               </div>
-              <p className="mt-2 text-xs uppercase text-white/50 sm:text-sm">
+              <p className="mt-2 text-xs uppercase text-white/50 sm:text-sm lg:mt-5 lg:text-[16px]">
                 <span className="font-semibold text-white/90">Countries</span> where people trust DeoVR as their
                 go-to VR player — from Tokyo to Toronto.
               </p>
