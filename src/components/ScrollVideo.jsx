@@ -156,14 +156,14 @@ export default function ScrollVideo() {
             </a>
           </div>
 
-          <div className="absolute left-6 bottom-10 hidden max-w-sm flex-col gap-2 sm:left-10 sm:bottom-14 lg:left-16 lg:flex">
+          <div className="absolute left-6 bottom-10 hidden max-w-sm flex-col gap-2 sm:left-10 sm:bottom-14 lg:left-16 lg:flex lg:gap-5">
             <h3 className="text-lg font-semibold text-white sm:text-xl lg:text-[32px] lg:leading-[0.9] lg:tracking-[-0.06em]">
               Zero friction, from day one.
             </h3>
             <p className="text-xs uppercase text-white/50 sm:text-sm lg:text-[16px]">
               Install in under 60 seconds — <span className="font-semibold text-white/90">no account</span>, no setup required.
             </p>
-            <a href="#" className="text-xs font-semibold uppercase text-white underline underline-offset-4 sm:text-sm">
+            <a href="#" className="text-xs font-semibold uppercase text-white sm:text-sm lg:text-[16px]">
               Read more
             </a>
           </div>
