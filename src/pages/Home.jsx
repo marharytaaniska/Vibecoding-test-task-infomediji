@@ -1,3 +1,4 @@
+import Header from "../components/Header";
 import Hero from "../components/Hero";
 import Stats from "../components/Stats";
 import Reviews from "../components/Reviews";
@@ -10,6 +11,7 @@ import Footer from "../components/Footer";
 function Home() {
   return (
     <>
+      <Header />
       <Hero />
       <Stats />
       <Reviews />
