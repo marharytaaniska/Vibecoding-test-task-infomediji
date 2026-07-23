@@ -11,14 +11,14 @@ html {
 
 /* Scales the Test hero section's header + scroll-video overlay (text sizes,
    spacing, circle dimensions — anything built from calc(...*var(--hero-scale)))
-   proportionally with the viewport around the 1920px design width: exactly
-   1 (unchanged) at 1920px, growing on 4K/ultrawide screens above it and
-   shrinking smoothly below it instead of staying pinned at the fixed design
-   px sizes across the whole 1024–1919px range. Below the lg breakpoint
+   proportionally down from the 1920px design width, so the fixed design px
+   sizes don't stay pinned across the whole 1024–1919px range. Capped at 1 —
+   never scales up past 1920px, so 4K/ultrawide screens render at the
+   original fixed design sizes, same as before. Below the lg breakpoint
    (1024px) nothing reads this variable, since that layout switches to
    separate, non-scaled mobile sizes. */
 .hero-scale {
-  --hero-scale: calc(100vw / 1920px);
+  --hero-scale: min(1, calc(100vw / 1920px));
   /* The scale factor makes most font sizes in here fractional (e.g. 8.53px),
      which triggers visible RGB fringing on the white text over the dark
      video in Chromium's subpixel-AA path. Grayscale AA doesn't have that
