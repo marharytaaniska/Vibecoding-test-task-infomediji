@@ -6,7 +6,7 @@ export default function HeroVideoHeader() {
   return (
     <div
       id="site-header"
-      className="fixed left-6 right-6 top-4 z-[100] flex h-[84px] items-center justify-between gap-2 rounded-[24px] bg-white/10 px-8 backdrop-blur-[32px]"
+      className="fixed left-6 right-6 top-4 z-[100] flex h-[84px] items-center justify-between gap-2 rounded-[24px] bg-white/5 px-8 backdrop-blur-[32px]"
     >
       <Link to="/" className="shrink-0">
         <img src="/assets/logo-wordmark.png" alt="DeoVR" className="h-[34px] w-auto object-contain brightness-0 invert" />

@@ -31,6 +31,16 @@ const itemStyle = () => ({
   transitionDuration: `${EXIT_DURATION_MS}ms`,
 });
 
+// Scroll-cue circles: 5% white fill, with the border itself a 135deg
+// gradient fading from 50% to 0% white (top-left to bottom-right). A plain
+// `border` can't take a gradient, so this layers a flat-color fill clipped
+// to the padding-box under a gradient clipped to the border-box.
+const circleGradientBorderStyle = {
+  border: "1px solid transparent",
+  background:
+    "linear-gradient(rgba(255,255,255,0.05), rgba(255,255,255,0.05)) padding-box, linear-gradient(135deg, rgba(255,255,255,0.5), rgba(255,255,255,0)) border-box",
+};
+
 function animateItems(refs, visible) {
   refs.current.forEach((el, index) => {
     if (!el) return;
@@ -272,11 +282,7 @@ export default function ScrollVideo() {
             className="absolute left-1/2 bottom-8 hidden -translate-x-1/2 flex-col items-center gap-2 sm:bottom-12 sm:flex"
           >
             <div
-              style={{
-                border: "1px solid transparent",
-                background:
-                  "linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0.1)) padding-box, linear-gradient(135deg, rgba(255,255,255,0.5), rgba(255,255,255,0)) border-box",
-              }}
+              style={circleGradientBorderStyle}
               className="flex h-20 w-20 flex-col items-center justify-center gap-1 rounded-full text-[11px] font-medium uppercase tracking-wide text-white backdrop-blur-[5px] sm:h-24 sm:w-24 lg:h-[200px] lg:w-[200px] lg:text-[16px]"
             >
               <span>Discover</span>
@@ -346,7 +352,10 @@ export default function ScrollVideo() {
               style={itemStyle()}
               className="flex flex-col items-start gap-2"
             >
-              <div className="flex h-20 w-20 flex-col items-center justify-center gap-1 rounded-full border border-white bg-white/10 text-center text-[11px] font-medium uppercase tracking-wide text-white backdrop-blur-[5px] sm:h-24 sm:w-24 lg:h-[200px] lg:w-[200px] lg:text-[16px]">
+              <div
+                style={circleGradientBorderStyle}
+                className="flex h-20 w-20 flex-col items-center justify-center gap-1 rounded-full text-center text-[11px] font-medium uppercase tracking-wide text-white backdrop-blur-[5px] sm:h-24 sm:w-24 lg:h-[200px] lg:w-[200px] lg:text-[16px]"
+              >
                 <span>Keep scrolling</span>
                 <span aria-hidden="true">↓</span>
               </div>
